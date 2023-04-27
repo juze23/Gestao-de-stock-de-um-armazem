@@ -19,7 +19,7 @@ void AdicionarProduto(int *num_produtos, PRODUTO *produtos[MAX_produtos]){  //re
             return;                                             //retorna à main
         }
     }
-
+    //PAULO
     produtos[*num_produtos]->product_code = codigo;    //se não, o codigo da variavel PRODUTO toma o valor do novo codigo e são pedidos os restantes dados do produto
 
     printf("Insira o nome do produto: ");
