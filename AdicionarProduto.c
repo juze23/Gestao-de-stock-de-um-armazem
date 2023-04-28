@@ -46,4 +46,6 @@ int AdicionarProduto(int *num_produtos, PRODUTO *produtos){  //recebe o ponteiro
 
     (*num_produtos)++;             //acréscimo no ponteiro do numero de produtos para que este incremente 1 na variável da main
 
+    printf("Produto adicionado!\n");
+    system("pause");
 }

@@ -38,11 +38,12 @@ int AtualizarProduto(int *num_produtos, PRODUTO *produtos){
     printf("Insira o codigo do produto que deseja atualizar:\n");
     scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código
 
-   pos=pesquisaBin(codigoA, produtos, num_produtos);
+   pos=pesquisaBin(codigoA, produtos, num_produtos);        //posição do produto = pesquisaBin
 
    if(pos==-1){
 
-    printf("Produto nao encontrado");
+    printf("Produto nao encontrado\n");   //se a função pesquisaBin devolver -1 não encontrou produto com o numero inserido
+    system("pause");
     return;
    }
 
@@ -53,7 +54,7 @@ int AtualizarProduto(int *num_produtos, PRODUTO *produtos){
     printf("\n> ");
     scanf("%d", &op);
 
-    switch (op){
+    switch (op){            //opções para substituir informações já existentes
 
         case 1:
             printf("Insira a nova quantidade do produto:\n");
@@ -73,5 +74,6 @@ int AtualizarProduto(int *num_produtos, PRODUTO *produtos){
             printf("Nao existe essa opcao");
             break;
         }
-    printf("Atualizacao feita");
+    printf("Atualizacao feita!\n");
+    system("pause");
 }
