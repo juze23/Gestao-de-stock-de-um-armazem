@@ -6,9 +6,9 @@
 int menu(){
 
     int op = 0;
-    printf("\n*** Gestao de Stock de um armazem de distribuicao de alimentos ***\n\n");     //por completar
-    printf("\n1 - Adicionar produto ao stock");     //por fazer
-    printf("\n2 - Atualizar as informacoes de um produto existente");       //por fazer
+    printf("\n*** Gestao de Stock de um armazem de distribuicao de alimentos ***\n\n");
+    printf("\n1 - Adicionar produto ao stock");     //por completar
+    printf("\n2 - Atualizar as informacoes de um produto existente");       //muito incompleto
     printf("\n3 - Remover um produto do stock");        //por fazer
     printf("\n4 - Apresentar informacoes de um produto");       //por fazer
     printf("\n5 - Listar todos os produtos em stock por ordem alfabetica");     //por fazer
@@ -36,8 +36,11 @@ int main(){
         switch(op){
 
             case 1:
-                AdicionarProduto(&num_produtos, &produtos[MAX_produtos]);   //envia o endereço do número de produtos, da struct produtos e do MAX
-            break;
+                AdicionarProduto(&num_produtos, &produtos);   //envia o endereço do número de produtos, da struct produtos e do MAX
+                break;
+            case 2:
+                AtualizarProduto(&num_produtos, &produtos);  //envia as variáveis utilizadas
+                break;
             case 0:
             printf("Saiu!\n");
             return 0;

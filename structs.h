@@ -16,6 +16,7 @@ typedef struct{
 
 }PRODUTO;
 
-void AdicionarProduto(int *num_produtos, PRODUTO *produtos[MAX_produtos]);    //recebe o ponteiro para o numero de produtos, da struct e do tamanho máximo da struct
+int AdicionarProduto(int *num_produtos, PRODUTO *produtos);    //recebe o ponteiro para o numero de produtos, da struct e do tamanho máximo da struct
+int AtualizarProduto(int *num_produtos, PRODUTO *produtos);
 
 #endif
