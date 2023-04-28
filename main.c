@@ -39,7 +39,7 @@ int main(){
                 AdicionarProduto(&num_produtos, &produtos);   //envia o endereço do número de produtos, da struct produtos e do MAX
             break;
             case 2:
-                AtualizarProduto(&num_produtos, &produtos[MAX_produtos]);   //envia as variáveis utilizadas
+                AtualizarProduto(&num_produtos, &produtos);   //envia as variáveis utilizadas
             case 0:
             printf("Saiu!\n");
             return 0;
