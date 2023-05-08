@@ -27,6 +27,10 @@ int menu(){
 int main(){
 
     PRODUTO produtos[MAX_produtos];     //variável da struct produtos
+    
+    ELEMENTO *iniLista=NULL;
+    ELEMENTO *fimLista=NULL;
+    
     int num_produtos = 0;               //variável do número de produtos
     int op = 0;                         //variável da opção
 

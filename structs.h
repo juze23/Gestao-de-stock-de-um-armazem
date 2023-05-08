@@ -4,7 +4,7 @@
 #include <string.h>
 #define MAX_produtos 2
 
-typedef struct{
+typedef struct produto{
 
     int product_code;
     char product_name[32];
@@ -15,6 +15,14 @@ typedef struct{
     float venda;
 
 }PRODUTO;
+
+typedef struct Elem{
+
+    PRODUTO node;
+    struct Elem *proximo;
+    struct Elem *anterior;
+    
+}ELEMENTO;
 
 int AdicionarProduto(int *num_produtos, PRODUTO *produtos);    //recebe o ponteiro para o numero de produtos, da struct e do tamanho máximo da struct
 int AtualizarProduto(int *num_produtos, PRODUTO *produtos);
