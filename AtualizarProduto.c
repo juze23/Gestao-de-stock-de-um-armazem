@@ -28,7 +28,7 @@ int pesquisaBin(int codigoA, PRODUTO *produtos, int *num_produtos){
 }
 
 
-int AtualizarProduto(int *num_produtos, PRODUTO *produtos){
+void AtualizarProduto(int *num_produtos, PRODUTO *produtos){
 
     int codigoA=0;
     int pos=0;

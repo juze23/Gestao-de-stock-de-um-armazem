@@ -3,10 +3,12 @@
 #include <string.h>
 #include "structs.h"
 
-int AdicionarProduto(int *num_produtos, PRODUTO *produtos){  //recebe o ponteiro para o numero de produtos, da struct e do tamanho máximo da struct
+void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProduto, int *num_produtos){
 
     int codigo;         //variável para receber novo código
     int i=0;            //variável para usar no for
+    PRODUTO aux;
+    ELEMENTO *novo = NULL;
 
     printf("Insira o codigo do produto: ");     //pede o código do novo produto
     scanf("%d", &codigo);                       //guarda o código do novo produto
@@ -23,24 +25,27 @@ int AdicionarProduto(int *num_produtos, PRODUTO *produtos){  //recebe o ponteiro
     produtos[*num_produtos].product_code = codigo;    //se não, o codigo da variavel PRODUTO toma o valor do novo codigo e são pedidos os restantes dados do produto
 
     printf("Insira o nome do produto: ");
+    scanf("%[^\n]s", aux.product_name);
     fflush(stdin);
-    scanf("%[^\n]s", produtos[*num_produtos].product_name);
 
     printf("Insira a categoria do produto: ");
     fflush(stdin);
-    scanf("%[^\n]s", produtos[*num_produtos].categoria);
+    scanf("%[^\n]s", aux.categoria);
 
     //  printf("Insira a data de validade do produto: ")
     //  scanf("%?", novo_produto.data de validae)
     
     printf("Insira a quantidade: ");
-    scanf("%d", &produtos[*num_produtos].quantidade);
+    scanf("%d", &aux.quantidade);
+    fflush(stdin);
 
     printf("Insira o preco de compra do produto (sem usar virgulas): ");
-    scanf("%f", &produtos[*num_produtos].compra);
+    scanf("%f", &aux.compra);
+    fflush(stdin);
 
     printf("Insira o preco de venda do produto (sem usar virgulas): ");
-    scanf("%f", &produtos[*num_produtos].venda);
+    scanf("%f", &aux.venda);
+    fflush(stdin);
 
     //são utilizados apontadores para o numero de produtos para receber os dados pois estes apontam para a variável criada na main
 

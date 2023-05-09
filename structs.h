@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX_produtos 2
 
 typedef struct produto{
 
@@ -16,15 +15,15 @@ typedef struct produto{
 
 }PRODUTO;
 
-typedef struct Elem{
+typedef struct elemento{
 
-    PRODUTO node;
+    PRODUTO lista;
     struct Elem *proximo;
     struct Elem *anterior;
     
 }ELEMENTO;
 
-int AdicionarProduto(int *num_produtos, PRODUTO *produtos);    //recebe o ponteiro para o numero de produtos, da struct e do tamanho máximo da struct
-int AtualizarProduto(int *num_produtos, PRODUTO *produtos);
+void AdicionarProduto(int *num_produtos, PRODUTO *produtos);    //recebe o ponteiro para o numero de produtos, da struct e do tamanho máximo da struct
+void AtualizarProduto(int *num_produtos, PRODUTO *produtos);
 
 #endif
