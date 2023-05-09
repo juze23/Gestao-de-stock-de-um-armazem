@@ -22,7 +22,7 @@ void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProdu
         }
     }
 
-    produtos[*num_produtos].product_code = codigo;    //se não, o codigo da variavel PRODUTO toma o valor do novo codigo e são pedidos os restantes dados do produto
+    aux.product_code = codigo;    //se não, o codigo da variavel PRODUTO toma o valor do novo codigo e são pedidos os restantes dados do produto
 
     printf("Insira o nome do produto: ");
     scanf("%[^\n]s", aux.product_name);
