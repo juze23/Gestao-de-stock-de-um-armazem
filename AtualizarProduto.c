@@ -70,6 +70,9 @@ void AtualizarProduto(int *num_produtos, PRODUTO *produtos){
             printf("Insira o novo preco de venda do produto:\n");
             scanf("%f", &produtos[pos].venda);
             break;
+        case 4:
+        
+            break;
         default:
             printf("Nao existe essa opcao");
             break;

@@ -1,4 +1,5 @@
 #ifndef structs_h
+#define structs_h
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,12 +19,15 @@ typedef struct produto{
 typedef struct elemento{
 
     PRODUTO lista;
-    struct Elem *proximo;
-    struct Elem *anterior;
+    struct elemento *proximo;
+    struct elemento *anterior;
     
 }ELEMENTO;
 
-void AdicionarProduto(int *num_produtos, PRODUTO *produtos);    //recebe o ponteiro para o numero de produtos, da struct e do tamanho máximo da struct
+void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProduto);
 void AtualizarProduto(int *num_produtos, PRODUTO *produtos);
+void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num)
+void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista);
+void listarProdutosCodigo(int cod, ELEMENTO *iniLista);
 
 #endif
