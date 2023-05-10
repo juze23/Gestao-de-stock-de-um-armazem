@@ -100,11 +100,48 @@ void listarProdutosCodigo(int cod, ELEMENTO *iniLista){                  //case 
     
 }
 
-void listarProdutosAlfabetica(ELEMENTO **inilista, ELEMENTO **fimLista){        //case 5
 
+void bubbleSort(ELEMENTO *iniLista) { // depois precisamos mudar para quickSort
+    int troca = 1;
 
+    while (troca) {   // só pára o while quando não houver mais nenhuma troca
 
-                                                        //quickSort
+        ELEMENTO *atual = iniLista; //  Cria um ponteiro atual que aponta para o início da lista ligada
+        troca = 0;  // defina troca como 0 para indicar que nenhuma troca foi realizada até o momento
+
+        while (atual->proximo != NULL) {                        // percorre a lista ligada
+            if (strcasecmp(atual->lista.product_name, atual->proximo->lista.product_name) > 0) { // compara o nome do produto atual com o proximo
+                PRODUTO aux = atual->lista;                     //cria uma varivel aux para armazenar o produto atual.
+                atual->lista = atual->proximo->lista;           //substitui o produto atual pelo próximo produto na lista.
+                atual->proximo->lista = aux;                    //substitui o próximo produto na lista pelo produto temporário armazenado em aux.
+                troca = 1;                                      //define troca como 1 para indicar que uma troca foi feita
+            }
+            atual = atual->proximo;                             //move o "atual" para o proximo elemento da lista
+        }
+    }
+}
+
+ 
+
+void listarProdutosAlfabetica(ELEMENTO *iniLista){        //case 5
+
+    
+    ELEMENTO *aux = iniLista;
+
+    bubbleSort(iniLista);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
+
+    if(iniLista == NULL){
+
+        printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
+        return;
+    }
+
+    while(aux != NULL){
+        
+        printf("%-8d %-25s %-12s %-20s %-14d %-20.2f %-12.2f\n", aux->lista.product_code, aux->lista.product_name, aux->lista.categoria, "data de validade", aux->lista.quantidade, aux->lista.compra, aux->lista.venda);
+        aux = aux->proximo; // percorrer todos os produtos
+    }
+
 }
 
 void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista){       //case 0

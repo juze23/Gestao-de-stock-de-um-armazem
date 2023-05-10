@@ -33,7 +33,7 @@ void AtualizarProduto(int *num_produtos, PRODUTO *produtos){
     int codigoA=0;
     int pos=0;
     int op=0;
-    int i=0;
+    
 
     printf("Insira o codigo do produto que deseja atualizar:\n");
     scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código

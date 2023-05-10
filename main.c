@@ -30,8 +30,10 @@ int main(){
     
     ELEMENTO *iniLista=NULL;
     ELEMENTO *fimLista=NULL;
+
     
-    int num_produtos = 0;               //variável do número de produtos
+    
+    int num_produtos = 0;           //variável do número de produtos
     int op = 0;                         //variável da opção
 
     do{
@@ -93,6 +95,11 @@ int main(){
                 listarProdutosCodigo(cod, iniLista);
                 system("pause");
                 break;
+            case 5:
+            printf("Lista de todos os produtos ordenador por ordem alfabetica: \n");
+            listarProdutosAlfabetica(iniLista);
+            system("pause");
+            break;
             case 0:
                 libertarLista(&iniLista, &fimLista);
                 printf("Saiu!\n");
