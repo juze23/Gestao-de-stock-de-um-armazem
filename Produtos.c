@@ -49,7 +49,7 @@ void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num){     //ca
 
     if(aux == NULL){
 
-        return -1;
+        return;         //se não houver produto a seguir, retorna ao menu
     }
     if(aux->anterior == NULL){
         *iniLista = aux->proximo;
@@ -81,10 +81,10 @@ void listarProdutosCodigo(int cod, ELEMENTO *iniLista){                  //case 
 
     if(iniLista == NULL){
 
-        printf("Lista vazia!\n");
+        printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
         return;
     }
-
+                    //acrescentar algo para quando não existe produto com o código pedido printar "Não existe produto com esse código!"
     aux = iniLista;
     printf("%-8s %-25s %-12s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
@@ -92,10 +92,10 @@ void listarProdutosCodigo(int cod, ELEMENTO *iniLista){                  //case 
 
         if(aux->lista.product_code == cod){
             
-            printf("%-8s %-25s %-12s %-20s %-14s %-20s %-12s\n", aux->lista.product_code, aux->lista.product_name, aux->lista.categoria, "data de validade", aux->lista.quantidade, aux->lista.compra, aux->lista.venda);
+            printf("%-8d %-25s %-12s %-20s %-14d %-20.2f %-12.2f\n", aux->lista.product_code, aux->lista.product_name, aux->lista.categoria, "data de validade", aux->lista.quantidade, aux->lista.compra, aux->lista.venda);
 
         }
-        aux = aux->proximo;
+        aux = aux->proximo;     //correr os produtos todos até encontrar o produto com o codigo igual
     }
     
 }

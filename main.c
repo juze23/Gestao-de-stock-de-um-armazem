@@ -68,9 +68,11 @@ int main(){
                 scanf("%f", &produtos_aux.venda);
                 fflush(stdin);
 
+                num_produtos++;
+
                 AdicionarProduto(&iniLista, &fimLista, produtos_aux);
 
-                printf("Participante inserido\n");
+                printf("\nProduto inserido\n");
                 system("pause");
 
                 break;
@@ -81,18 +83,21 @@ int main(){
                 int num=0;
                 printf("Insira o codigo do produto que deseja remover:\n");
                 scanf("%d", &num);
-                removeElem(&iniLista, &fimLista, num);
+                removerProduto(&iniLista, &fimLista, num);
+                system("pause");
                 break;
             case 4:
                 int cod=0;
                 printf("Insira o codigo do produto que deseja ver:\n");
                 scanf("%d", &cod);
                 listarProdutosCodigo(cod, iniLista);
+                system("pause");
+                break;
             case 0:
                 libertarLista(&iniLista, &fimLista);
                 printf("Saiu!\n");
                 return 0;
-            break;
+                break;
             default:
                 printf("Opcao invalida");
         }

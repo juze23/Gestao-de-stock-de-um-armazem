@@ -26,8 +26,8 @@ typedef struct elemento{
 
 void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProduto);
 void AtualizarProduto(int *num_produtos, PRODUTO *produtos);
-void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num)
-void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista);
+void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num);
 void listarProdutosCodigo(int cod, ELEMENTO *iniLista);
+void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista);
 
 #endif
