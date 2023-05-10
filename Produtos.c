@@ -144,6 +144,27 @@ void listarProdutosAlfabetica(ELEMENTO *iniLista){        //case 5
 
 }
 
+void valordostockatual(ELEMENTO *iniLista){
+
+    ELEMENTO *aux =iniLista;
+    float soma = 0;
+
+    while(aux != NULL){                                       //percorre a lista
+        soma += aux->lista.quantidade*aux->lista.compra;      //faz a soma do valor atual do stock multiplicando a quantidade do produto com o preço de compra
+        aux = aux->proximo; 
+    }
+
+    printf("O valor total do stock e de %.2f\n", soma);
+
+   aux =iniLista;                                             //volta ao inicio da lista
+
+    while(aux != NULL){
+        
+        printf("%-25s %-12s %-14d %-12.2f\n", aux->lista.product_name, aux->lista.categoria, aux->lista.quantidade, aux->lista.quantidade*aux->lista.compra);
+        aux = aux->proximo; // percorrer todos os produtos
+    }
+}
+
 void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista){       //case 0
 
     ELEMENTO *aux = *iniLista, *proximo = NULL;

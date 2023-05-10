@@ -96,10 +96,14 @@ int main(){
                 system("pause");
                 break;
             case 5:
-            printf("Lista de todos os produtos ordenador por ordem alfabetica: \n");
-            listarProdutosAlfabetica(iniLista);
-            system("pause");
-            break;
+                printf("Lista de todos os produtos ordenador por ordem alfabetica: \n");
+                listarProdutosAlfabetica(iniLista);
+                system("pause");
+                break;
+            case 8:
+                valordostockatual(iniLista);
+                system("pause");
+                break;
             case 0:
                 libertarLista(&iniLista, &fimLista);
                 printf("Saiu!\n");

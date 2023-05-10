@@ -32,6 +32,6 @@ void listarProdutosCodigo(int cod, ELEMENTO *iniLista);
 void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista);
 void bubbleSort(ELEMENTO *iniLista);
 void listarProdutosAlfabetica(ELEMENTO *iniLista);
-void quickSort(ELEMENTO *esquerda, ELEMENTO *direita);
+void valordostockatual(ELEMENTO *iniLista);
 
 #endif
