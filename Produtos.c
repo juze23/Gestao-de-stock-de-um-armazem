@@ -166,6 +166,7 @@ void listarProdutosAlfabetica(ELEMENTO *iniLista){        //case 5
     }
 
     aux = iniLista;
+    printf("%-8s %-25s %-12s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux != NULL){
         

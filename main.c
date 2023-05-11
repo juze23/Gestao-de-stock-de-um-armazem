@@ -3,6 +3,44 @@
 #include <string.h>
 #include "structs.h"
 
+/*int menu(){
+
+    int op = 0;
+    printf("\n*** Gestao de Stock de um armazem de distribuicao de alimentos ***\n\n");
+    printf("\nEscolha a opção relativa a area na qual pretende trabalhar:\n");
+    printf("\n1 - Gestao de produtos");         //por fazer
+    printf("\n2 - Gestao de clientes");         //por fazer
+    printf("\n3 - Gestao de vendas");           //por fazer
+    printf("\n0 - Sair");
+    printf("\n> ");
+    scanf("%d", &op);       //recebe a opção
+    return op;              //envia a opção
+}*/
+
+/*int menuCliente(){
+
+    int op = 0;
+    printf("\n*** Gestao da informacao dos clientes do armazem ***\n\n");
+    printf("\n1 - Adicionar um novo cliente");
+    printf("\n2 - Alterar as informações de um cliente");
+    printf("\n3 - Listar todos os clientes por ordem alfabética");
+    printf("\n4 - Apresentar as informacoes de um cliente");
+    printf("\n> ");
+    scanf("%d", &op);       //recebe a opção
+    return op;              //envia a opção
+}*/
+
+/*int menuVendas(){
+
+    int op = 0;
+    printf("\n*** Registo de vendas do armazem ***\n\n")
+    printf("\n1 - Registar vendas de produtos");
+    printf("\n2 - Criacao de relatorios de vendas");
+    printf("\n> ");
+    scanf("%d", &op);       //recebe a opção
+    return op;              //envia a opção
+}*/
+
 int menu(){
 
     int op = 0;
@@ -30,8 +68,6 @@ int main(){
     
     ELEMENTO *iniLista=NULL;
     ELEMENTO *fimLista=NULL;
-
-    
     
     int num_produtos = 0;           //variável do número de produtos
     int op = 0;                     //variável da opção
@@ -85,7 +121,7 @@ int main(){
 
                 AdicionarProduto(&iniLista, &fimLista, produtos_aux);
 
-                printf("\nProduto inserido\n");
+                printf("\nProduto adicionado\n");
                 system("pause");
 
                 break;
