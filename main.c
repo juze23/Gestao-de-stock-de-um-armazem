@@ -34,7 +34,9 @@ int main(){
     
     
     int num_produtos = 0;           //variável do número de produtos
-    int op = 0;                         //variável da opção
+    int op = 0;                     //variável da opção
+    int res;
+    int voltar_menu = 0;               
 
     do{
         system("cls");          //clear screen para limpar o ecrã depois de chamar a função desejada
@@ -42,10 +44,19 @@ int main(){
         switch(op){
 
             case 1:
+                do{
                 printf("Insira o codigo do produto:\n");
                 scanf("%d", &produtos_aux.product_code);
                 fflush(stdin);
-
+                res = verificarcodigo(&iniLista, &produtos_aux.product_code);   
+                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                    voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                    break;
+                }
+                }while(res!=0);                                              // quando o res for igual a 0, ele para de fazer o ciclo
+                if (voltar_menu) {                                           // se o voltar_menu for igual a 1, volta para o menu
+                break; // retorna ao menu
+                }
                 printf("Insira o nome do produto:\n");
                 scanf("%[^\n]s", produtos_aux.product_name);
                 fflush(stdin);
@@ -112,7 +123,7 @@ int main(){
             default:
                 printf("Opcao invalida");
         }
-
+        
     }while(op != 0);
 
 }

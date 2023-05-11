@@ -33,5 +33,8 @@ void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista);
 void bubbleSort(ELEMENTO *iniLista);
 void listarProdutosAlfabetica(ELEMENTO *iniLista);
 void valordostockatual(ELEMENTO *iniLista);
+int verificarcodigo(ELEMENTO **iniLista, int *codigo);
+
+
 
 #endif

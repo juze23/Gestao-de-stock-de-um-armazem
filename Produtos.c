@@ -5,7 +5,8 @@
 
 void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProduto){    //case 1
 
-    ELEMENTO *novo = NULL;      //variável auxiliar para acrescentar novo produto
+    ELEMENTO *novo = NULL;    //variável auxiliar para acrescentar novo produto
+    
 
     novo = (ELEMENTO *) malloc(sizeof(ELEMENTO));       //reservar memória para colocar um produto
 
@@ -30,6 +31,34 @@ void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProdu
         *fimLista = novo;
     }
 
+
+}
+
+int verificarcodigo(ELEMENTO **iniLista, int *codigo){
+
+    ELEMENTO *aux = *iniLista;
+    
+
+    while(aux != NULL){
+        if(*codigo == aux->lista.product_code){          //percorre a lista para verificar se os codigos dos produtos são iguais
+
+            printf("Esse codigo ja existe.\n");
+            printf("Deseja inserir outro codigo?(S/N)\n");
+            char resposta[3];
+            scanf("%s", resposta);
+
+            if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+                return -1;
+            }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+                return -2;
+            }else{
+                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                return -2;
+            }
+        }
+        aux = aux->proximo;
+    }
+    return 0;
 }
 
 //void atualizarProduto(){              //case 2
@@ -101,13 +130,13 @@ void listarProdutosCodigo(int cod, ELEMENTO *iniLista){                  //case 
 }
 
 
-void bubbleSort(ELEMENTO *iniLista) { // depois precisamos mudar para quickSort
+void bubbleSort(ELEMENTO *iniLista) {                           // depois precisamos mudar para quickSort
     int troca = 1;
 
-    while (troca) {   // só pára o while quando não houver mais nenhuma troca
+    while (troca) {                                             // só pára o while quando não houver mais nenhuma troca
 
-        ELEMENTO *atual = iniLista; //  Cria um ponteiro atual que aponta para o início da lista ligada
-        troca = 0;  // defina troca como 0 para indicar que nenhuma troca foi realizada até o momento
+        ELEMENTO *atual = iniLista;                             //  Cria um ponteiro atual que aponta para o início da lista ligada
+        troca = 0;                                              // defina troca como 0 para indicar que nenhuma troca foi realizada até o momento
 
         while (atual->proximo != NULL) {                        // percorre a lista ligada
             if (strcasecmp(atual->lista.product_name, atual->proximo->lista.product_name) > 0) { // compara o nome do produto atual com o proximo
@@ -126,7 +155,7 @@ void bubbleSort(ELEMENTO *iniLista) { // depois precisamos mudar para quickSort
 void listarProdutosAlfabetica(ELEMENTO *iniLista){        //case 5
 
     
-    ELEMENTO *aux = iniLista;
+    ELEMENTO *aux = NULL;
 
     bubbleSort(iniLista);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
 
@@ -135,6 +164,8 @@ void listarProdutosAlfabetica(ELEMENTO *iniLista){        //case 5
         printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
         return;
     }
+
+    aux = iniLista;
 
     while(aux != NULL){
         
@@ -177,4 +208,5 @@ void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista){       //case 0
         aux=proximo;
     }
 }
+
 
