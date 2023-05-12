@@ -16,19 +16,19 @@ void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProdu
         exit(-1);
     }
 
-    novo->lista = newProduto;               //não sei comentar isto, depois comento
-    novo->anterior = NULL;
-    novo->proximo = NULL;
+    novo->lista = newProduto;               //iguala o apontador do auxiliar "novo" ao novo produto recebido
+    novo->anterior = NULL;                  //inicializa o apontador para o produto anterior a NULL
+    novo->proximo = NULL;                   //inicializa o apontador para o produto seguinte a NULL
 
-    if(*fimLista == NULL){
+    if(*fimLista == NULL){              //se o fim de lista for NULL
 
         *iniLista=novo;
-        *fimLista=novo;
+        *fimLista=novo;            //o novo produto fica no inicio e fim da lista pois é o primeiro da lista
     }
-    else{
-        novo->anterior = *fimLista;
-        (*fimLista)->proximo = novo;
-        *fimLista = novo;
+    else{                                   //se não (else)
+        novo->anterior = *fimLista;             //o apontador do novo produto para o anterior toma o valor do fim da lista
+        (*fimLista)->proximo = novo;            //o apontador do fim da lista para o proximo toma o valor do novo produto
+        *fimLista = novo;                       //iguala o fim da lista ao novo produto
     }
 
 
