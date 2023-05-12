@@ -61,11 +61,89 @@ int verificarcodigo(ELEMENTO **iniLista, int *codigo){
     return 0;
 }
 
-//void atualizarProduto(){              //case 2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "structs.h"
 
-                            //fazer esta função com listas ligadas
+int pesquisaBin(int codigoA, int *num_produtos, ELEMENTO *iniLista){
 
-//}
+    int ini=0, meio=0, fim=*num_produtos-1;        //pesquisa binária para encontrar a posição do código
+    ELEMENTO *aux = iniLista;
+
+    while(aux !=NULL){
+
+        meio=((ini+fim)/2);
+
+        if(codigoA==aux->lista.product_code){
+
+            return meio;
+        }
+        if(codigoA== aux->lista.product_code){
+
+            fim=meio-1;
+        }
+        else{
+
+            ini=meio+1;
+        }
+        aux = aux->proximo;
+    }
+    return -1;
+}
+
+
+void AtualizarProduto(int *num_produtos,ELEMENTO *iniLista){
+
+    int codigoA=0;
+    int pos=0;
+    int op=0;
+    
+    ELEMENTO *aux = iniLista;
+    
+
+    printf("Insira o codigo do produto que deseja atualizar:\n");
+    scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código
+
+   pos=pesquisaBin(codigoA,num_produtos,iniLista);        //posição do produto = pesquisaBin
+
+   if(pos==-1){
+
+    printf("Produto nao encontrado\n");   //se a função pesquisaBin devolver -1 não encontrou produto com o numero inserido
+    system("pause");
+    return;
+   }
+
+    printf("O que deseja atualizar do produto?");
+    printf("\n1 - Quantidade do produto");
+    printf("\n2 - Preco de venda");
+    printf("\n3 - Ambos");
+    printf("\n> ");
+    scanf("%d", &op);
+
+    switch (op){            //opções para substituir informações já existentes
+
+        case 1:
+            printf("Insira a nova quantidade do produto:\n");
+            scanf("%d", &aux->lista.quantidade);
+            break;
+        case 2:
+            printf("Insira o novo preco de venda do produto:\n");
+            scanf("%f", &aux->lista.venda);
+            break;
+        case 3:
+            printf("Insira a nova quantidade do produto:\n");
+            scanf("%d", &aux->lista.quantidade);
+            printf("Insira o novo preco de venda do produto:\n");
+            scanf("%f", &aux->lista.venda);
+            break;
+        default:
+            printf("Nao existe essa opcao");
+            break;
+        }
+    printf("Atualizacao feita!\n");
+    system("pause");
+}
 
 void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num){     //case 3
 

@@ -126,7 +126,7 @@ int main(){
 
                 break;
             case 2:
-                //AtualizarProduto(&num_produtos, &produtos);  //envia as variáveis utilizadas
+                AtualizarProduto(&num_produtos, iniLista);  //envia as variáveis utilizadas
                 break;
             case 3:
                 int num=0;
