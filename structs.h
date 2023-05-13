@@ -6,8 +6,8 @@
 
 typedef struct produto{
 
-    int product_code;
-    char product_name[32];
+    int codigo_produto;
+    char nome_produto[32];
     char categoria[32];
     //data de validade
     int quantidade;
@@ -17,24 +17,26 @@ typedef struct produto{
 
 }PRODUTO;
 
-typedef struct elemento{
+typedef struct elemento_p{
 
-    PRODUTO lista;
-    struct elemento *proximo;
-    struct elemento *anterior;
+    PRODUTO lista_p;
+    struct elemento_p *proximo;
+    struct elemento_p *anterior;
     
-}ELEMENTO;
+}ELEMENTO_P;
 
-void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProduto);
-void AtualizarProduto(int *num_produtos,ELEMENTO *iniLista);
-void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num);
-void listarProdutosCodigo(int cod, ELEMENTO *iniLista);
-void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista);
-void bubbleSort(ELEMENTO *iniLista);
-void listarProdutosAlfabetica(ELEMENTO *iniLista);
-void valordostockatual(ELEMENTO *iniLista);
-int verificarcodigo(ELEMENTO **iniLista, int *codigo);
-
+void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
+void AdicionarProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, PRODUTO newProduto);
+void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista);
+void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num);
+void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista);
+void bubbleSort(ELEMENTO_P *iniLista);
+void listarProdutosAlfabetica(ELEMENTO_P *iniLista);
+void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista);
+void valordostockatual(ELEMENTO_P *iniLista);
+int verificarcodigo(ELEMENTO_P **iniLista, int *codigo);
+void guardarProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
+void libertarLista(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
 
 
 #endif

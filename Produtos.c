@@ -3,12 +3,33 @@
 #include <string.h>
 #include "structs.h"
 
-void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProduto){    //case 1
+void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista, ELEMENTO_P **fimLista){       //o programa não anda com isto | rever
 
-    ELEMENTO *novo = NULL;    //variável auxiliar para acrescentar novo produto
+    FILE *fp = NULL;
+    PRODUTO produtos;
+
+    fp = fopen("produtos.dat", "rb");
+
+    if(fp == NULL){
+
+        printf("Erro ao ler do ficheiro");
+        return;
+    }
+
+    while(fread(&produtos, sizeof(ELEMENTO_P), 1, fp)==1){
+
+        num_produtos++;
+        AdicionarProduto(iniLista, fimLista, produtos);
+    }
+    fclose(fp);
+}
+
+void AdicionarProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, PRODUTO newProduto){    //case 1
+
+    ELEMENTO_P *novo = NULL;    //variável auxiliar para acrescentar novo produto
     
 
-    novo = (ELEMENTO *) malloc(sizeof(ELEMENTO));       //reservar memória para colocar um produto
+    novo = (ELEMENTO_P *) malloc(sizeof(ELEMENTO_P));       //reservar memória para colocar um produto
 
     if(novo == NULL){
 
@@ -16,7 +37,7 @@ void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProdu
         exit(-1);
     }
 
-    novo->lista = newProduto;               //iguala o apontador do auxiliar "novo" ao novo produto recebido
+    novo->lista_p = newProduto;               //iguala o apontador do auxiliar "novo" ao novo produto recebido
     novo->anterior = NULL;                  //inicializa o apontador para o produto anterior a NULL
     novo->proximo = NULL;                   //inicializa o apontador para o produto seguinte a NULL
 
@@ -34,13 +55,13 @@ void AdicionarProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, PRODUTO newProdu
 
 }
 
-int verificarcodigo(ELEMENTO **iniLista, int *codigo){
+int verificarcodigo(ELEMENTO_P **iniLista, int *codigo){        //incremento ao case 1
 
-    ELEMENTO *aux = *iniLista;
+    ELEMENTO_P *aux = *iniLista;
     
 
     while(aux != NULL){
-        if(*codigo == aux->lista.product_code){          //percorre a lista para verificar se os codigos dos produtos são iguais
+        if(*codigo == aux->lista_p.codigo_produto){          //percorre a lista para verificar se os codigos dos produtos são iguais
 
             printf("Esse codigo ja existe.\n");
             printf("Deseja inserir outro codigo?(S/N)\n");
@@ -61,25 +82,20 @@ int verificarcodigo(ELEMENTO **iniLista, int *codigo){
     return 0;
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "structs.h"
-
-int pesquisaBin(int codigoA, int *num_produtos, ELEMENTO *iniLista){
+int pesquisaBinCod(int codigoA, int *num_produtos, ELEMENTO_P *iniLista){             //incremento ao case 2
 
     int ini=0, meio=0, fim=*num_produtos-1;        //pesquisa binária para encontrar a posição do código
-    ELEMENTO *aux = iniLista;
+    ELEMENTO_P *aux = iniLista;
 
     while(aux !=NULL){
 
         meio=((ini+fim)/2);
 
-        if(codigoA==aux->lista.product_code){
+        if(codigoA==aux->lista_p.codigo_produto){
 
             return meio;
         }
-        if(codigoA== aux->lista.product_code){
+        if(codigoA== aux->lista_p.codigo_produto){
 
             fim=meio-1;
         }
@@ -93,19 +109,19 @@ int pesquisaBin(int codigoA, int *num_produtos, ELEMENTO *iniLista){
 }
 
 
-void AtualizarProduto(int *num_produtos,ELEMENTO *iniLista){
+void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista){              //case 2
 
     int codigoA=0;
     int pos=0;
     int op=0;
     
-    ELEMENTO *aux = iniLista;
+    ELEMENTO_P *aux = iniLista;
     
 
     printf("Insira o codigo do produto que deseja atualizar:\n");
     scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código
 
-   pos=pesquisaBin(codigoA,num_produtos,iniLista);        //posição do produto = pesquisaBin
+   pos=pesquisaBinCod(codigoA,num_produtos,iniLista);        //posição do produto = pesquisaBin
 
    if(pos==-1){
 
@@ -125,31 +141,29 @@ void AtualizarProduto(int *num_produtos,ELEMENTO *iniLista){
 
         case 1:
             printf("Insira a nova quantidade do produto:\n");
-            scanf("%d", &aux->lista.quantidade);
+            scanf("%d", &aux->lista_p.quantidade);
             break;
         case 2:
             printf("Insira o novo preco de venda do produto:\n");
-            scanf("%f", &aux->lista.venda);
+            scanf("%f", &aux->lista_p.venda);
             break;
         case 3:
             printf("Insira a nova quantidade do produto:\n");
-            scanf("%d", &aux->lista.quantidade);
+            scanf("%d", &aux->lista_p.quantidade);
             printf("Insira o novo preco de venda do produto:\n");
-            scanf("%f", &aux->lista.venda);
+            scanf("%f", &aux->lista_p.venda);
             break;
         default:
             printf("Nao existe essa opcao");
             break;
         }
-    printf("Atualizacao feita!\n");
-    system("pause");
 }
 
-void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num){     //case 3
+void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num){     //case 3
 
-    ELEMENTO *aux = *iniLista;
+    ELEMENTO_P *aux = *iniLista;
 
-    while(aux!=NULL && aux->lista.product_code != num){
+    while(aux!=NULL && aux->lista_p.codigo_produto != num){
 
         aux = aux->proximo;
     }
@@ -182,9 +196,9 @@ void removerProduto(ELEMENTO **iniLista, ELEMENTO **fimLista, int num){     //ca
     }
 }
 
-void listarProdutosCodigo(int cod, ELEMENTO *iniLista){                  //case 4
+void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista){                  //case 4
 
-    ELEMENTO *aux = NULL;
+    ELEMENTO_P *aux = NULL;
 
     if(iniLista == NULL){
 
@@ -193,13 +207,13 @@ void listarProdutosCodigo(int cod, ELEMENTO *iniLista){                  //case 
     }
                     //acrescentar algo para quando não existe produto com o código pedido printar "Não existe produto com esse código!"
     aux = iniLista;
-    printf("%-8s %-25s %-12s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
+    printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux != NULL){
 
-        if(aux->lista.product_code == cod){
+        if(aux->lista_p.codigo_produto == cod){
             
-            printf("%-8d %-25s %-12s %-20s %-14d %-20.2f %-12.2f\n", aux->lista.product_code, aux->lista.product_name, aux->lista.categoria, "data de validade", aux->lista.quantidade, aux->lista.compra, aux->lista.venda);
+            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
 
         }
         aux = aux->proximo;     //correr os produtos todos até encontrar o produto com o codigo igual
@@ -208,19 +222,19 @@ void listarProdutosCodigo(int cod, ELEMENTO *iniLista){                  //case 
 }
 
 
-void bubbleSort(ELEMENTO *iniLista) {                           // depois precisamos mudar para quickSort
-    int troca = 1;
+void bubbleSort(ELEMENTO_P *iniLista) {                           //incremento ao case 5
+    int troca = 1;                              // depois precisamos mudar para quickSort  <----------
 
     while (troca) {                                             // só pára o while quando não houver mais nenhuma troca
 
-        ELEMENTO *atual = iniLista;                             //  Cria um ponteiro atual que aponta para o início da lista ligada
+        ELEMENTO_P *atual = iniLista;                             //  Cria um ponteiro atual que aponta para o início da lista ligada
         troca = 0;                                              // defina troca como 0 para indicar que nenhuma troca foi realizada até o momento
 
         while (atual->proximo != NULL) {                        // percorre a lista ligada
-            if (strcasecmp(atual->lista.product_name, atual->proximo->lista.product_name) > 0) { // compara o nome do produto atual com o proximo
-                PRODUTO aux = atual->lista;                     //cria uma varivel aux para armazenar o produto atual.
-                atual->lista = atual->proximo->lista;           //substitui o produto atual pelo próximo produto na lista.
-                atual->proximo->lista = aux;                    //substitui o próximo produto na lista pelo produto temporário armazenado em aux.
+            if (strcasecmp(atual->lista_p.nome_produto, atual->proximo->lista_p.nome_produto) > 0) { // compara o nome do produto atual com o proximo
+                PRODUTO aux = atual->lista_p;                     //cria uma varivel aux para armazenar o produto atual.
+                atual->lista_p = atual->proximo->lista_p;           //substitui o produto atual pelo próximo produto na lista.
+                atual->proximo->lista_p = aux;                    //substitui o próximo produto na lista pelo produto temporário armazenado em aux.
                 troca = 1;                                      //define troca como 1 para indicar que uma troca foi feita
             }
             atual = atual->proximo;                             //move o "atual" para o proximo elemento da lista
@@ -230,10 +244,10 @@ void bubbleSort(ELEMENTO *iniLista) {                           // depois precis
 
  
 
-void listarProdutosAlfabetica(ELEMENTO *iniLista){        //case 5
+void listarProdutosAlfabetica(ELEMENTO_P *iniLista){        //case 5
 
     
-    ELEMENTO *aux = NULL;
+    ELEMENTO_P *aux = NULL;
 
     bubbleSort(iniLista);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
 
@@ -244,23 +258,48 @@ void listarProdutosAlfabetica(ELEMENTO *iniLista){        //case 5
     }
 
     aux = iniLista;
-    printf("%-8s %-25s %-12s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
+    printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux != NULL){
         
-        printf("%-8d %-25s %-12s %-20s %-14d %-20.2f %-12.2f\n", aux->lista.product_code, aux->lista.product_name, aux->lista.categoria, "data de validade", aux->lista.quantidade, aux->lista.compra, aux->lista.venda);
+        printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
         aux = aux->proximo; // percorrer todos os produtos
     }
 
 }
 
-void valordostockatual(ELEMENTO *iniLista){
+void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista){      //case 6 | ta mal e n dá erros n sei pq mas depois corrijo
 
-    ELEMENTO *aux =iniLista;
+    ELEMENTO_P *aux = NULL;
+
+    if(iniLista == NULL){
+
+        printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
+        return;
+    }
+
+    aux = iniLista;
+
+    printf("Lista dos produtos da categoria \"%s\":\n", &categoriaA);
+
+    printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
+
+    while(aux!=NULL){ 
+        if(strcasecmp(aux->lista_p.categoria, &categoriaA)==0){
+        
+        printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+        }
+        aux = aux->proximo; // percorrer todos os produtos
+    }
+}
+
+void valordostockatual(ELEMENTO_P *iniLista){               //case 8
+
+    ELEMENTO_P *aux =iniLista;
     float soma = 0;
 
     while(aux != NULL){                                       //percorre a lista
-        soma += aux->lista.quantidade*aux->lista.compra;      //faz a soma do valor atual do stock multiplicando a quantidade do produto com o preço de compra
+        soma += aux->lista_p.quantidade*aux->lista_p.compra;      //faz a soma do valor atual do stock multiplicando a quantidade do produto com o preço de compra
         aux = aux->proximo; 
     }
 
@@ -270,14 +309,35 @@ void valordostockatual(ELEMENTO *iniLista){
 
     while(aux != NULL){
         
-        printf("%-25s %-12s %-14d %-12.2f\n", aux->lista.product_name, aux->lista.categoria, aux->lista.quantidade, aux->lista.quantidade*aux->lista.compra);
+        printf("%-25s %-18s %-14d %-12.2f\n", aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.quantidade, aux->lista_p.quantidade*aux->lista_p.compra);
         aux = aux->proximo; // percorrer todos os produtos
     }
 }
 
-void libertarLista(ELEMENTO **iniLista, ELEMENTO **fimLista){       //case 0
+void guardarProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista){          //o programa não anda com isto | rever
 
-    ELEMENTO *aux = *iniLista, *proximo = NULL;
+    FILE *fp = NULL;
+    ELEMENTO_P *aux = *iniLista;
+
+    fp = fopen("produtos.dat", "wb");
+
+    if(fp == NULL){
+
+        printf("Erro ao guardar no ficheiro");
+        return;
+    }
+
+    while(aux != NULL){
+
+        fwrite(&aux->lista_p, sizeof(ELEMENTO_P), 1, fp);
+        aux = aux->proximo;
+    }
+    fclose(fp);
+}
+
+void libertarLista(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista){       //case 0
+
+    ELEMENTO_P *aux = *iniLista, *proximo = NULL;
     *iniLista = NULL;
     *fimLista = NULL;
     while(aux!=NULL){

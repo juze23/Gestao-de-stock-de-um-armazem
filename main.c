@@ -66,8 +66,8 @@ int main(){
 
     PRODUTO produtos_aux;     //variável da struct produtos
     
-    ELEMENTO *iniLista=NULL;
-    ELEMENTO *fimLista=NULL;
+    ELEMENTO_P *iniLista=NULL;
+    ELEMENTO_P *fimLista=NULL;
     
     int num_produtos = 0;           //variável do número de produtos
     int op = 0;                     //variável da opção
@@ -76,15 +76,16 @@ int main(){
 
     do{
         system("cls");          //clear screen para limpar o ecrã depois de chamar a função desejada
+        //lerProdutosBin(num_produtos, &iniLista, &fimLista);
         op = menu();            //dá o valor que recebe da função menu à variável opção
         switch(op){
 
             case 1:
                 do{
                 printf("Insira o codigo do produto:\n");
-                scanf("%d", &produtos_aux.product_code);
+                scanf("%d", &produtos_aux.codigo_produto);
                 fflush(stdin);
-                res = verificarcodigo(&iniLista, &produtos_aux.product_code);   
+                res = verificarcodigo(&iniLista, &produtos_aux.codigo_produto);   
                 if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
                     voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
                     break;
@@ -94,7 +95,7 @@ int main(){
                 break; // retorna ao menu
                 }
                 printf("Insira o nome do produto:\n");
-                scanf("%[^\n]s", produtos_aux.product_name);
+                scanf("%[^\n]s", produtos_aux.nome_produto);
                 fflush(stdin);
 
                 //printf("Insira a data de validade do produto: ")
@@ -121,18 +122,22 @@ int main(){
 
                 AdicionarProduto(&iniLista, &fimLista, produtos_aux);
 
-                printf("\nProduto adicionado\n");
+                printf("Produto adicionado\n");
                 system("pause");
 
                 break;
             case 2:
                 AtualizarProduto(&num_produtos, iniLista);  //envia as variáveis utilizadas
+                printf("Produto atualizado!\n");
+                system("pause");
                 break;
             case 3:
                 int num=0;
                 printf("Insira o codigo do produto que deseja remover:\n");
                 scanf("%d", &num);
+                num_produtos--;
                 removerProduto(&iniLista, &fimLista, num);
+                printf("Produto removido!\n");
                 system("pause");
                 break;
             case 4:
@@ -147,11 +152,19 @@ int main(){
                 listarProdutosAlfabetica(iniLista);
                 system("pause");
                 break;
+            case 6:
+                char categoriaA[50];
+                printf("Insira a categoria de produtos que deseja listar:\n");
+                scanf("%s", categoriaA);
+                listarProdutosCategoria(*categoriaA, iniLista);
+                system("pause");
+                break;
             case 8:
                 valordostockatual(iniLista);
                 system("pause");
                 break;
             case 0:
+                //guardarProdutosBin(&iniLista, &fimLista);
                 libertarLista(&iniLista, &fimLista);
                 printf("Saiu!\n");
                 return 0;
