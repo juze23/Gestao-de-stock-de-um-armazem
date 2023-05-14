@@ -3,7 +3,7 @@
 #include <string.h>
 #include "structs.h"
 
-void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista, ELEMENTO_P **fimLista){       //o programa não anda com isto | rever
+void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //o programa não anda com isto | rever
 
     FILE *fp = NULL;
     PRODUTO produtos;
@@ -19,12 +19,12 @@ void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista, ELEMENTO_P **fimLis
     while(fread(&produtos, sizeof(ELEMENTO_P), 1, fp)==1){
 
         num_produtos++;
-        AdicionarProduto(iniLista, fimLista, produtos);
+        AdicionarProduto(iniLista_p, fimLista_p, produtos);
     }
     fclose(fp);
 }
 
-void AdicionarProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, PRODUTO newProduto){    //case 1
+void AdicionarProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, PRODUTO newProduto){    //case 1
 
     ELEMENTO_P *novo = NULL;    //variável auxiliar para acrescentar novo produto
     
@@ -41,23 +41,23 @@ void AdicionarProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, PRODUTO newP
     novo->anterior = NULL;                  //inicializa o apontador para o produto anterior a NULL
     novo->proximo = NULL;                   //inicializa o apontador para o produto seguinte a NULL
 
-    if(*fimLista == NULL){              //se o fim de lista for NULL
+    if(*fimLista_p == NULL){              //se o fim de lista for NULL
 
-        *iniLista=novo;
-        *fimLista=novo;            //o novo produto fica no inicio e fim da lista pois é o primeiro da lista
+        *iniLista_p=novo;
+        *fimLista_p=novo;            //o novo produto fica no inicio e fim da lista pois é o primeiro da lista
     }
     else{                                   //se não (else)
-        novo->anterior = *fimLista;             //o apontador do novo produto para o anterior toma o valor do fim da lista
-        (*fimLista)->proximo = novo;            //o apontador do fim da lista para o proximo toma o valor do novo produto
-        *fimLista = novo;                       //iguala o fim da lista ao novo produto
+        novo->anterior = *fimLista_p;             //o apontador do novo produto para o anterior toma o valor do fim da lista
+        (*fimLista_p)->proximo = novo;            //o apontador do fim da lista para o proximo toma o valor do novo produto
+        *fimLista_p = novo;                       //iguala o fim da lista ao novo produto
     }
 
 
 }
 
-int verificarcodigo(ELEMENTO_P **iniLista, int *codigo){        //incremento ao case 1
+int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento ao case 1
 
-    ELEMENTO_P *aux = *iniLista;
+    ELEMENTO_P *aux = *iniLista_p;
     
 
     while(aux != NULL){
@@ -82,10 +82,10 @@ int verificarcodigo(ELEMENTO_P **iniLista, int *codigo){        //incremento ao 
     return 0;
 }
 
-int pesquisaBinCod(int codigoA, int *num_produtos, ELEMENTO_P *iniLista){             //incremento ao case 2
+int pesquisaBinCod(int codigoA, int *num_produtos, ELEMENTO_P *iniLista_p){             //incremento ao case 2
 
     int ini=0, meio=0, fim=*num_produtos-1;        //pesquisa binária para encontrar a posição do código
-    ELEMENTO_P *aux = iniLista;
+    ELEMENTO_P *aux = iniLista_p;
 
     while(aux !=NULL){
 
@@ -109,19 +109,19 @@ int pesquisaBinCod(int codigoA, int *num_produtos, ELEMENTO_P *iniLista){       
 }
 
 
-void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista){              //case 2
+void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista_p){              //case 2
 
     int codigoA=0;
     int pos=0;
     int op=0;
     
-    ELEMENTO_P *aux = iniLista;
+    ELEMENTO_P *aux = iniLista_p;
     
 
     printf("Insira o codigo do produto que deseja atualizar:\n");
     scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código
 
-   pos=pesquisaBinCod(codigoA,num_produtos,iniLista);        //posição do produto = pesquisaBin
+   pos=pesquisaBinCod(codigoA,num_produtos,iniLista_p);        //posição do produto = pesquisaBin
 
    if(pos==-1){
 
@@ -159,9 +159,9 @@ void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista){              //ca
         }
 }
 
-void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num){     //case 3
+void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num){     //case 3
 
-    ELEMENTO_P *aux = *iniLista;
+    ELEMENTO_P *aux = *iniLista_p;
 
     while(aux!=NULL && aux->lista_p.codigo_produto != num){
 
@@ -173,10 +173,10 @@ void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num){     
         return;         //se não houver produto a seguir, retorna ao menu
     }
     if(aux->anterior == NULL){
-        *iniLista = aux->proximo;
-        if(*iniLista!=NULL){
+        *iniLista_p = aux->proximo;
+        if(*iniLista_p!=NULL){
 
-            (*iniLista)->anterior = NULL;
+            (*iniLista_p)->anterior = NULL;
         }
     }
     else{
@@ -184,10 +184,10 @@ void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num){     
     }
     if(aux->proximo == NULL){
 
-        *fimLista = aux->anterior;
-        if(*fimLista != NULL){
+        *fimLista_p = aux->anterior;
+        if(*fimLista_p != NULL){
 
-            (*fimLista)->proximo=NULL;
+            (*fimLista_p)->proximo=NULL;
         }
     }
     else{
@@ -196,17 +196,17 @@ void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num){     
     }
 }
 
-void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista){                  //case 4
+void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista_p){                  //case 4
 
     ELEMENTO_P *aux = NULL;
 
-    if(iniLista == NULL){
+    if(iniLista_p == NULL){
 
         printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
         return;
     }
                     //acrescentar algo para quando não existe produto com o código pedido printar "Não existe produto com esse código!"
-    aux = iniLista;
+    aux = iniLista_p;
     printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux != NULL){
@@ -222,12 +222,12 @@ void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista){                  //cas
 }
 
 
-void bubbleSort(ELEMENTO_P *iniLista) {                           //incremento ao case 5
+void bubbleSort(ELEMENTO_P *iniLista_p) {                           //incremento ao case 5
     int troca = 1;                              // depois precisamos mudar para quickSort  <----------
 
     while (troca) {                                             // só pára o while quando não houver mais nenhuma troca
 
-        ELEMENTO_P *atual = iniLista;                             //  Cria um ponteiro atual que aponta para o início da lista ligada
+        ELEMENTO_P *atual = iniLista_p;                             //  Cria um ponteiro atual que aponta para o início da lista ligada
         troca = 0;                                              // defina troca como 0 para indicar que nenhuma troca foi realizada até o momento
 
         while (atual->proximo != NULL) {                        // percorre a lista ligada
@@ -244,20 +244,20 @@ void bubbleSort(ELEMENTO_P *iniLista) {                           //incremento a
 
  
 
-void listarProdutosAlfabetica(ELEMENTO_P *iniLista){        //case 5
+void listarProdutosAlfabetica(ELEMENTO_P *iniLista_p){        //case 5
 
     
     ELEMENTO_P *aux = NULL;
 
-    bubbleSort(iniLista);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
+    bubbleSort(iniLista_p);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
 
-    if(iniLista == NULL){
+    if(iniLista_p == NULL){
 
         printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
         return;
     }
 
-    aux = iniLista;
+    aux = iniLista_p;
     printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux != NULL){
@@ -268,17 +268,17 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista){        //case 5
 
 }
 
-void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista){      //case 6 | ta mal e n dá erros n sei pq mas depois corrijo
+void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista_p){      //case 6 | ta mal e n dá erros n sei pq mas depois corrijo
 
     ELEMENTO_P *aux = NULL;
 
-    if(iniLista == NULL){
+    if(iniLista_p == NULL){
 
         printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
         return;
     }
 
-    aux = iniLista;
+    aux = iniLista_p;
 
     printf("Lista dos produtos da categoria \"%s\":\n", &categoriaA);
 
@@ -293,9 +293,9 @@ void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista){      //case
     }
 }
 
-void valordostockatual(ELEMENTO_P *iniLista){               //case 8
+void valordostockatual(ELEMENTO_P *iniLista_p){               //case 8
 
-    ELEMENTO_P *aux =iniLista;
+    ELEMENTO_P *aux =iniLista_p;
     float soma = 0;
 
     while(aux != NULL){                                       //percorre a lista
@@ -305,7 +305,7 @@ void valordostockatual(ELEMENTO_P *iniLista){               //case 8
 
     printf("O valor total do stock e de %.2f\n", soma);
 
-   aux =iniLista;                                             //volta ao inicio da lista
+   aux =iniLista_p;                                             //volta ao inicio da lista
 
     while(aux != NULL){
         
@@ -314,10 +314,10 @@ void valordostockatual(ELEMENTO_P *iniLista){               //case 8
     }
 }
 
-void guardarProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista){          //o programa não anda com isto | rever
+void guardarProdutosBin(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){          //o programa não anda com isto | rever
 
     FILE *fp = NULL;
-    ELEMENTO_P *aux = *iniLista;
+    ELEMENTO_P *aux = *iniLista_p;
 
     fp = fopen("produtos.dat", "wb");
 
@@ -335,11 +335,11 @@ void guardarProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista){          
     fclose(fp);
 }
 
-void libertarLista(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista){       //case 0
+void libertarLista(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //case 0
 
-    ELEMENTO_P *aux = *iniLista, *proximo = NULL;
-    *iniLista = NULL;
-    *fimLista = NULL;
+    ELEMENTO_P *aux = *iniLista_p, *proximo = NULL;
+    *iniLista_p = NULL;
+    *fimLista_p = NULL;
     while(aux!=NULL){
 
         proximo = aux->proximo;
