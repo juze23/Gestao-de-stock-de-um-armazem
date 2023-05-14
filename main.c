@@ -65,15 +65,20 @@ int menuProduto(){
 int main(){
 
     PRODUTO produtos_aux;     //variável da struct produtos
-    
+    CLIENTE cliente_aux;
+
     ELEMENTO_P *iniLista_p=NULL;
     ELEMENTO_P *fimLista_p=NULL;
+
+    ELEMENTO_C *iniLista_c=NULL;
+    ELEMENTO_C *fimLista_c=NULL;
     
     int num_produtos = 0;           //variável do número de produtos
     int op = 0;                     //variável da opção do menu principal
     int opP = 0, opC = 0, opV = 0;              //variável das opções dos menus secundários
     int res;
-    int voltar_menu = 0;               
+    int voltar_menu = 0;
+    cliente_aux.numero = 0;
 
     do{
         system("cls");          //clear screen para limpar o ecrã depois de chamar a função desejada
@@ -152,7 +157,7 @@ int main(){
                             system("pause");
                             break;
                         case 5:
-                            printf("Lista de todos os produtos ordenador por ordem alfabetica: \n");
+                            printf("Lista de todos os produtos ordenados por ordem alfabetica: \n");
                             listarProdutosAlfabetica(iniLista_p);
                             system("pause");
                             break;
@@ -185,12 +190,48 @@ int main(){
                     opC = menuCliente();
                     switch(opC){
                         case 1:
+                            fflush(stdin);
+                            printf("Insira o nome do cliente:\n");
+                            scanf("%[^\n]s", cliente_aux.nome);
+                            fflush(stdin);
+
+                            printf("Insira a morada do cliente:\n");
+                            scanf("%[^\n]s", cliente_aux.morada);
+                            fflush(stdin);
+
+                            printf("Insira o NIF do cliente:\n");
+                            scanf("%d", &cliente_aux.NIF);            
+                            fflush(stdin);
+
+                            printf("Insira o numero de telefone do cliente:\n");
+                            scanf("%d", &cliente_aux.n_telefone);            
+                            fflush(stdin);
+
+                            printf("Insira o email do cliente:\n");
+                            scanf("%[^\n]s",cliente_aux.email);
+                            fflush(stdin);
+
+                            cliente_aux.numero++;
+
+                            AdicionarCliente(&iniLista_c, &fimLista_c, cliente_aux);
+
+                            printf("Cliente adicionado\n");
+                            system("pause");
+
                             break;
                         case 2:
                             break;
                         case 3:
+                            printf("Lista de todos os clientes ordenados por ordem alfabetica: \n");
+                            listarClientesAlfabetica(iniLista_c);
+                            system("pause");
                             break;
                         case 4:
+                            int nif=0;
+                            printf("Insira o NIF do cliente que deseja ver:\n");
+                            scanf("%d", &nif);
+                            listarClientesNIF(nif, iniLista_c);
+                            system("pause");
                             break;
                         case 0:
                             printf("A voltar!\n");

@@ -222,7 +222,7 @@ void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista_p){                  //c
 }
 
 
-void bubbleSort(ELEMENTO_P *iniLista_p) {                           //incremento ao case 5
+void bubbleSortP(ELEMENTO_P *iniLista_p) {                           //incremento ao case 5
     int troca = 1;                              // depois precisamos mudar para quickSort  <----------
 
     while (troca) {                                             // só pára o while quando não houver mais nenhuma troca
@@ -249,7 +249,7 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista_p){        //case 5
     
     ELEMENTO_P *aux = NULL;
 
-    bubbleSort(iniLista_p);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
+    bubbleSortP(iniLista_p);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
 
     if(iniLista_p == NULL){
 
