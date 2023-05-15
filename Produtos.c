@@ -318,7 +318,9 @@ void valordostockatual(ELEMENTO_P *iniLista_p){               //case 8
 
     printf("O valor total do stock e de %.2f\n", soma);
 
-   aux =iniLista_p;                                             //volta ao inicio da lista
+   aux =iniLista_p;                                            //volta ao inicio da lista
+
+    printf("%-25s %-18s %-14s %-12s\n","Nome" , "Categoria", "Quantidade", "Valor de Stock");
 
     while(aux != NULL){
         
