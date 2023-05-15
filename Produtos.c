@@ -259,8 +259,7 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista_p){        //case 5
     
     ELEMENTO_P *aux = NULL;
 
-    bubbleSortP(iniLista_p);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
-
+                   
     if(iniLista_p == NULL){
 
         printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
@@ -268,6 +267,10 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista_p){        //case 5
     }
 
     aux = iniLista_p;
+
+    bubbleSortP(iniLista_p);            //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
+
+
     printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux != NULL){
