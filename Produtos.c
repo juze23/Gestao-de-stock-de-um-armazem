@@ -209,6 +209,7 @@ void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num){ 
 void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista_p){                  //case 4
 
     ELEMENTO_P *aux = NULL;
+    int cont = 0;
 
     if(iniLista_p == NULL){
 
@@ -217,6 +218,22 @@ void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista_p){                  //c
     }
                     //acrescentar algo para quando não existe produto com o código pedido printar "Não existe produto com esse código!"
     aux = iniLista_p;
+
+    while(aux != NULL){
+
+        if(aux->lista_p.codigo_produto == cod){
+            cont++;
+        }
+        aux = aux->proximo;     //correr os produtos todos até encontrar o produto com o codigo igual
+    }
+    
+    if(cont == 0){
+        printf("Codigo nao encontrado\n");
+        return;
+    }
+
+    aux = iniLista_p;
+
     printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux != NULL){

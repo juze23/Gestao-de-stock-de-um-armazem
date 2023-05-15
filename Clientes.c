@@ -82,6 +82,8 @@ void listarClientesAlfabetica(ELEMENTO_C *iniLista_c){        //case 5
 void listarClientesNIF(int nif, ELEMENTO_C *iniLista_c){                  //case 4
 
     ELEMENTO_C *aux = NULL;
+    int cont = 0;
+    
 
     if(iniLista_c == NULL){
 
@@ -90,6 +92,22 @@ void listarClientesNIF(int nif, ELEMENTO_C *iniLista_c){                  //case
     }
                     //acrescentar algo para quando não existe produto com o código pedido printar "Não existe produto com esse código!"
     aux = iniLista_c;
+
+    while(aux != NULL){
+
+        if(aux->lista_c.NIF == nif){
+            cont++;    
+        }
+        aux= aux->proximo;
+    }
+
+    if(cont == 0){
+        printf("NIF nao encontrado\n");
+        return;
+    }
+
+    aux = iniLista_c;
+
     printf("%-8s %-25s %-18s %-20s %-14s %-20s\n", "Numero", "Nome", "Morada", "NIF","Telefone", "Email");
 
     while(aux != NULL){
@@ -98,6 +116,8 @@ void listarClientesNIF(int nif, ELEMENTO_C *iniLista_c){                  //case
             
         printf("%-8d %-25s %-18s %-20d %-14d %-20s\n", aux->lista_c.numero, aux->lista_c.nome, aux->lista_c.morada, aux->lista_c.NIF, aux->lista_c.n_telefone, aux->lista_c.email);
 
+        }else {
+            
         }
         aux = aux->proximo;     //correr os produtos todos até encontrar o produto com o codigo igual
     }
