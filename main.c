@@ -100,8 +100,9 @@ int main(){
                                         break;
                                     }
                             }while(res!=0);                                              // quando o res for igual a 0, ele para de fazer o ciclo
-                            if (voltar_menu) {                                           // se o voltar_menu for igual a 1, volta para o menu
-                            break; // retorna ao menu
+                            if (voltar_menu) {
+                                voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                break; // retorna ao menu
                             }
                             printf("Insira o nome do produto:\n");
                             scanf("%[^\n]s", produtos_aux.nome_produto);
@@ -146,7 +147,6 @@ int main(){
                             scanf("%d", &num);
                             num_produtos--;
                             removerProduto(&iniLista_p, &fimLista_p, num);
-                            printf("Produto removido!\n");
                             system("pause");
                             break;
                         case 4:
@@ -165,7 +165,7 @@ int main(){
                             char categoriaA[50];
                             printf("Insira a categoria de produtos que deseja listar:\n");
                             scanf("%s", categoriaA);
-                            listarProdutosCategoria(*categoriaA, iniLista_p);
+                            listarProdutosCategoria(categoriaA, iniLista_p);
                             system("pause");
                             break;
                         case 8:

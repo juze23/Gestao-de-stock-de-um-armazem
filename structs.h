@@ -32,7 +32,7 @@ void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num);
 void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista);
 void bubbleSortP(ELEMENTO_P *iniLista);
 void listarProdutosAlfabetica(ELEMENTO_P *iniLista);
-void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista);
+void listarProdutosCategoria(char categoriaA[], ELEMENTO_P *iniLista);
 void valordostockatual(ELEMENTO_P *iniLista);
 int verificarcodigo(ELEMENTO_P **iniLista, int *codigo);
 void guardarProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);

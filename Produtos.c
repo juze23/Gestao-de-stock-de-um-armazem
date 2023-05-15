@@ -161,7 +161,17 @@ void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista_p){              //
 
 void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num){     //case 3
 
-    ELEMENTO_P *aux = *iniLista_p;
+    ELEMENTO_P *aux = NULL;
+
+    if(*iniLista_p == NULL){
+
+        printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
+        return;
+    }else {
+        printf("Produto removido!\n");
+    }
+    
+    aux = *iniLista_p;  
 
     while(aux!=NULL && aux->lista_p.codigo_produto != num){
 
@@ -268,7 +278,7 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista_p){        //case 5
 
 }
 
-void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista_p){      //case 6 | ta mal e n dá erros n sei pq mas depois corrijo
+void listarProdutosCategoria(char categoriaA[], ELEMENTO_P *iniLista_p){      //case 6 | já está a funcinar
 
     ELEMENTO_P *aux = NULL;
 
@@ -280,12 +290,12 @@ void listarProdutosCategoria(char categoriaA, ELEMENTO_P *iniLista_p){      //ca
 
     aux = iniLista_p;
 
-    printf("Lista dos produtos da categoria \"%s\":\n", &categoriaA);
+    printf("Lista dos produtos da categoria \"%s\":\n", categoriaA);
 
     printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
 
     while(aux!=NULL){ 
-        if(strcasecmp(aux->lista_p.categoria, &categoriaA)==0){
+        if(strcasecmp(aux->lista_p.categoria, categoriaA)==0){
         
         printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
         }
