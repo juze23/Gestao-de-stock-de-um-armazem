@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "structs.h"
 
 int menu(){
@@ -47,15 +48,15 @@ int menuProduto(){
 
     int op = 0;
     printf("\n*** Gestao de Stock de um armazem de distribuicao de alimentos ***\n\n");
-    printf("\n1 - Adicionar produto ao stock");     //por completar
-    printf("\n2 - Atualizar as informacoes de um produto existente");       //muito incompleto
-    printf("\n3 - Remover um produto do stock");        //incompleto
-    printf("\n4 - Apresentar informacoes de um produto");       //por fazer
-    printf("\n5 - Listar todos os produtos em stock por ordem alfabetica");     //por fazer
-    printf("\n6 - Listar os produtos em stock por categoria");      //por fazer
-    printf("\n7 - Listar os produtos em stock com data de validade vencida");       //por fazer
-    printf("\n8 - Calcular o valor do stock atual");        //por fazer
-    printf("\n9 - Criar relatorios de produtos que estao com stock abaixo do nivel minimo estabelecido pela empresa");      //por fazer
+    printf("\n1 - Adicionar produto ao stock");
+    printf("\n2 - Atualizar as informacoes de um produto existente - incompleto");
+    printf("\n3 - Remover um produto do stock");
+    printf("\n4 - Apresentar informacoes de um produto");
+    printf("\n5 - Listar todos os produtos em stock por ordem alfabetica");
+    printf("\n6 - Listar os produtos em stock por categoria");
+    printf("\n7 - Listar os produtos em stock com data de validade vencida");
+    printf("\n8 - Calcular o valor do stock atual");
+    printf("\n9 - Criar relatorios de produtos que estao com stock abaixo do nivel minimo estabelecido pela empresa");
     printf("\n0 - Voltar");
     printf("\n> ");
     scanf("%d", &op);       //recebe a opção
@@ -73,12 +74,13 @@ int main(){
     ELEMENTO_C *iniLista_c=NULL;
     ELEMENTO_C *fimLista_c=NULL;
     
-    int num_produtos = 0;           //variável do número de produtos
     int op = 0;                     //variável da opção do menu principal
     int opP = 0, opC = 0, opV = 0;              //variável das opções dos menus secundários
     int res;
     int voltar_menu = 0;
     cliente_aux.numero = 0;
+
+    //lerProdutosBin(&iniLista_p, &fimLista_p);
 
     do{
         system("cls");          //clear screen para limpar o ecrã depois de chamar a função desejada
@@ -116,19 +118,17 @@ int main(){
                             scanf("%[^\n]s", produtos_aux.categoria);
                             fflush(stdin);
 
-                            printf("Insira a quantidade: ");
+                            printf("Insira a quantidade:\n");
                             scanf("%d", &produtos_aux.quantidade);
                             fflush(stdin);
 
-                            printf("Insira o preco de compra do produto (sem usar virgulas): ");
+                            printf("Insira o preco de compra do produto (sem usar virgulas):\n");
                             scanf("%f", &produtos_aux.compra);
                             fflush(stdin);
 
-                            printf("Insira o preco de venda do produto (sem usar virgulas): ");
+                            printf("Insira o preco de venda do produto (sem usar virgulas):\n");
                             scanf("%f", &produtos_aux.venda);
                             fflush(stdin);
-
-                            num_produtos++;
 
                             AdicionarProduto(&iniLista_p, &fimLista_p, produtos_aux);
 
@@ -137,7 +137,7 @@ int main(){
 
                             break;
                         case 2:
-                            AtualizarProduto(&num_produtos, iniLista_p);  //envia as variáveis utilizadas
+                            //AtualizarProduto(iniLista_p);  //envia as variáveis utilizadas
                             printf("Produto atualizado!\n");
                             system("pause");
                             break;
@@ -145,7 +145,6 @@ int main(){
                             int num=0;
                             printf("Insira o codigo do produto que deseja remover:\n");
                             scanf("%d", &num);
-                            num_produtos--;
                             removerProduto(&iniLista_p, &fimLista_p, num);
                             system("pause");
                             break;
@@ -163,8 +162,9 @@ int main(){
                             break;
                         case 6:
                             char categoriaA[50];
+                            getchar();
                             printf("Insira a categoria de produtos que deseja listar:\n");
-                            scanf("%s", categoriaA);
+                            scanf("%[^\n]s", categoriaA);
                             listarProdutosCategoria(categoriaA, iniLista_p);
                             system("pause");
                             break;
@@ -176,7 +176,7 @@ int main(){
                             //guardarProdutosBin(&iniLista_p, &fimLista_p);
                             libertarLista(&iniLista_p, &fimLista_p);
                             printf("A voltar!\n");
-                            system("pause");
+                            sleep(1.5);
                             break;
                         default:
                             printf("Opcao invalida!");
@@ -235,7 +235,7 @@ int main(){
                             break;
                         case 0:
                             printf("A voltar!\n");
-                            system("pause");
+                            sleep(1.5);
                             break;
                         default:
                             printf("Opcao invalida!\n");
@@ -255,7 +255,7 @@ int main(){
                                 break;
                             case 0:
                                 printf("A voltar!\n");
-                                system("pause");
+                                sleep(1.5);
                                 break; 
                             default:
                             printf("Opcao invalida!\n");
@@ -274,5 +274,8 @@ int main(){
                 break;
         }
     }while(op != 0);
+
+    guardarProdutosBin(&iniLista_p);
         
+    return 0;
 }

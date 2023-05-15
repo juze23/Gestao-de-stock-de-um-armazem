@@ -3,7 +3,7 @@
 #include <string.h>
 #include "structs.h"
 
-void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //o programa não anda com isto | rever
+/*void lerProdutosBin(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //o programa não anda com isto | rever
 
     FILE *fp = NULL;
     PRODUTO produtos;
@@ -18,11 +18,10 @@ void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista_p, ELEMENTO_P **fimL
 
     while(fread(&produtos, sizeof(ELEMENTO_P), 1, fp)==1){
 
-        num_produtos++;
         AdicionarProduto(iniLista_p, fimLista_p, produtos);
     }
     fclose(fp);
-}
+}*/
 
 void AdicionarProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, PRODUTO newProduto){    //case 1
 
@@ -82,34 +81,7 @@ int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento a
     return 0;
 }
 
-int pesquisaBinCod(int codigoA, int *num_produtos, ELEMENTO_P *iniLista_p){             //incremento ao case 2
-
-    int ini=0, meio=0, fim=*num_produtos-1;        //pesquisa binária para encontrar a posição do código
-    ELEMENTO_P *aux = iniLista_p;
-
-    while(aux !=NULL){
-
-        meio=((ini+fim)/2);
-
-        if(codigoA==aux->lista_p.codigo_produto){
-
-            return meio;
-        }
-        if(codigoA== aux->lista_p.codigo_produto){
-
-            fim=meio-1;
-        }
-        else{
-
-            ini=meio+1;
-        }
-        aux = aux->proximo;
-    }
-    return -1;
-}
-
-
-void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista_p){              //case 2
+/*void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
 
     int codigoA=0;
     int pos=0;
@@ -121,14 +93,11 @@ void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista_p){              //
     printf("Insira o codigo do produto que deseja atualizar:\n");
     scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código
 
-   pos=pesquisaBinCod(codigoA,num_produtos,iniLista_p);        //posição do produto = pesquisaBin
+    while(aux != NULL && strcasecmp(aux->lista_p.codigo_produto, codigoA) == 0){
 
-   if(pos==-1){
 
-    printf("Produto nao encontrado\n");   //se a função pesquisaBin devolver -1 não encontrou produto com o numero inserido
-    system("pause");
-    return;
-   }
+
+    }
 
     printf("O que deseja atualizar do produto?");
     printf("\n1 - Quantidade do produto");
@@ -157,7 +126,7 @@ void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista_p){              //
             printf("Nao existe essa opcao");
             break;
         }
-}
+}*/
 
 void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num){     //case 3
 
@@ -346,7 +315,7 @@ void valordostockatual(ELEMENTO_P *iniLista_p){               //case 8
     }
 }
 
-void guardarProdutosBin(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){          //o programa não anda com isto | rever
+void guardarProdutosBin(ELEMENTO_P **iniLista_p){          //o programa não anda com isto | rever
 
     FILE *fp = NULL;
     ELEMENTO_P *aux = *iniLista_p;

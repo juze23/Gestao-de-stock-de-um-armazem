@@ -25,7 +25,7 @@ typedef struct elemento_p{
     
 }ELEMENTO_P;
 
-void lerProdutosBin(int num_produtos, ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
+void lerProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
 void AdicionarProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, PRODUTO newProduto);
 void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista);
 void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num);
@@ -35,7 +35,7 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista);
 void listarProdutosCategoria(char categoriaA[], ELEMENTO_P *iniLista);
 void valordostockatual(ELEMENTO_P *iniLista);
 int verificarcodigo(ELEMENTO_P **iniLista, int *codigo);
-void guardarProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
+void guardarProdutosBin(ELEMENTO_P **iniLista);
 void libertarLista(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
 
 //Clientes
