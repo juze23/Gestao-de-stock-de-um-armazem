@@ -36,7 +36,7 @@ void listarProdutosCategoria(char categoriaA[], ELEMENTO_P *iniLista);
 void valordostockatual(ELEMENTO_P *iniLista);
 int verificarcodigo(ELEMENTO_P **iniLista, int *codigo);
 void guardarProdutosBin(ELEMENTO_P *iniLista);
-void libertarLista(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
+void libertarListaProdutos(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p);
 
 //Clientes
 
@@ -59,9 +59,12 @@ typedef struct elemento_c{
     
 }ELEMENTO_C;
 
+void lerClientesBin(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c);
 void AdicionarCliente(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c, CLIENTE newCliente);
 void bubbleSortC(ELEMENTO_C *iniLista_c);
 void listarClientesAlfabetica(ELEMENTO_C *iniLista_c);
 void listarClientesNIF(int nif, ELEMENTO_C *iniLista_c);
+void guardarClientesBin(ELEMENTO_C *iniLista_c);
+void libertarListaClientes(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c);
 
 #endif

@@ -3,6 +3,24 @@
 #include <string.h>
 #include "structs.h"
 
+void lerClientesBin(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c){       //o programa não anda com isto | rever
+
+    FILE *fp = NULL;
+    CLIENTE clientes;
+
+    fp = fopen("clientes.dat", "rb");
+
+    if(fp == NULL){
+        return;
+    }
+
+    while(fread(&clientes, sizeof(CLIENTE), 1, fp)==1){
+
+        AdicionarCliente(iniLista_c, fimLista_c, clientes);
+    }
+    fclose(fp);
+}
+
 void AdicionarCliente(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c, CLIENTE newCliente){    //case 1
 
     ELEMENTO_C *novo = NULL;    //variável auxiliar para acrescentar novo produto
@@ -122,4 +140,39 @@ void listarClientesNIF(int nif, ELEMENTO_C *iniLista_c){                  //case
         aux = aux->proximo;     //correr os produtos todos até encontrar o produto com o codigo igual
     }
     
+}
+
+void guardarClientesBin(ELEMENTO_C *iniLista_c){          //o programa não anda com isto | rever
+
+    FILE *fp = NULL;
+    ELEMENTO_C *aux = iniLista_c;
+
+    fp = fopen("clientes.dat", "wb");
+
+    if(fp == NULL){
+
+        printf("Erro ao guardar no ficheiro");
+        
+        return;
+    }
+
+    while(aux != NULL){
+
+        fwrite(&aux->lista_c, sizeof(CLIENTE), 1, fp);
+        aux = aux->proximo;
+    }
+    fclose(fp);
+}
+
+void libertarListaClientes(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c){       //case 0
+
+    ELEMENTO_C *aux = *iniLista_c, *proximo = NULL;
+    *iniLista_c = NULL;
+    *fimLista_c = NULL;
+    while(aux!=NULL){
+
+        proximo = aux->proximo;
+        free(aux);
+        aux=proximo;
+    }
 }

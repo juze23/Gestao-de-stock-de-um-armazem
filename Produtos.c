@@ -334,8 +334,8 @@ void guardarProdutosBin(ELEMENTO_P *iniLista_p){          //o programa não anda
     }
     fclose(fp);
 }
-//ENVIAR PARA O GONÇALO :)
-void libertarLista(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //case 0
+
+void libertarListaProdutos(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){
 
     ELEMENTO_P *aux = *iniLista_p, *proximo = NULL;
     *iniLista_p = NULL;

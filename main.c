@@ -81,6 +81,7 @@ int main(){
     cliente_aux.numero = 0;
 
     lerProdutosBin(&iniLista_p, &fimLista_p);
+    lerClientesBin(&iniLista_c, &fimLista_c);
 
     do{
         system("cls");          //clear screen para limpar o ecrã depois de chamar a função desejada
@@ -272,8 +273,11 @@ int main(){
         }
     }while(op != 0);
 
-    guardarProdutosBin(iniLista_p);
-    libertarLista(&iniLista_p, &fimLista_p);
+    guardarProdutosBin(iniLista_p);    
+    guardarClientesBin(iniLista_c);
+    
+    libertarListaProdutos(&iniLista_p, &fimLista_p);
+    libertarListaClientes(&iniLista_c, &fimLista_c);
         
     return 0;
 }
