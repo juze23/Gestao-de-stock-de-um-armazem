@@ -49,9 +49,110 @@ void AdicionarCliente(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c, CLIENTE 
         *fimLista_c = novo;                       //iguala o fim da lista ao novo produto
     }
 
+    
 }
 
-// void AtualizarCliente()
+int numeroclientes(ELEMENTO_C *iniLista_c){
+
+    ELEMENTO_C *aux = iniLista_c;
+    int cont = 0;
+
+
+    while(aux != NULL){
+        cont++;
+        aux=aux->proximo;
+    }
+
+    return cont;
+}
+
+int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
+
+    ELEMENTO_C *aux = *iniLista_c;
+
+    while(aux != NULL){
+        if(*nif == aux->lista_c.NIF){          //percorre a lista para verificar se os codigos dos produtos são iguais
+
+            printf("Esse NIF ja existe.\n");
+            printf("Deseja inserir outro NIF?(S/N)\n");
+            char resposta[3];
+            scanf("%s", resposta);
+
+            if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+                return -1;
+            }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+                return -2;
+            }else{
+                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                return -2;
+            }
+        }
+        aux = aux->proximo;
+    }
+    return 0;
+}
+
+
+void AtualizarCliente(ELEMENTO_C *iniLista_c){
+
+    int nif;
+    int op=0;
+    
+
+    ELEMENTO_C *aux = iniLista_c;
+
+    printf("Insira o NIF do cliente que deseja atualizar:\n");
+    scanf("%d", &nif);
+
+    while(aux->lista_c.NIF != nif){
+        aux = aux->proximo;
+    }
+
+
+    printf("O que deseja atualizar do cliente?");
+    printf("\n1 - Morada do cliente");
+    printf("\n2 - Numero de telefone do cliente");
+    printf("\n3 - Email do cliente");
+    printf("\n4 - Ambos");
+    printf("\n> ");
+    scanf("%d", &op);
+
+    switch (op){            //opções para substituir informações já existentes
+
+        case 1:
+            printf("Insira a nova morada do cliente:\n");
+            fflush(stdin);
+            scanf("%[^\n]s", aux->lista_c.morada);
+            break;
+        case 2:
+            printf("Insira o novo preco de venda do produto:\n");
+            fflush(stdin);
+            scanf("%d", &aux->lista_c.n_telefone);
+            break;
+        case 3:
+            printf("Insira o novo email do cliente:\n");
+            fflush(stdin);
+            scanf("%[^\n]s", aux->lista_c.email);
+        case 4:
+            printf("Insira a nova morada do cliente:\n");
+            fflush(stdin);
+            scanf("%[^\n]s", aux->lista_c.morada);
+
+            printf("Insira o novo preco de venda do produto:\n");
+            fflush(stdin);
+            scanf("%d", &aux->lista_c.n_telefone);
+
+            printf("Insira o novo email do cliente:\n");
+            fflush(stdin);
+            scanf("%[^\n]s", aux->lista_c.email);
+            break;
+        default:
+            printf("Nao existe essa opcao");
+            break;
+        }
+}
+
+
 
 void bubbleSortC(ELEMENTO_C *iniLista_c) {                           //incremento ao case 3
     int troca = 1;                              // depois precisamos mudar para quickSort  <----------
@@ -78,15 +179,18 @@ void listarClientesAlfabetica(ELEMENTO_C *iniLista_c){        //case 5
     
     ELEMENTO_C *aux = NULL;
 
-    bubbleSortC(iniLista_c);               //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
-
+                   
     if(iniLista_c == NULL){
 
         printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
         return;
     }
 
-    aux = iniLista_c;
+    aux = iniLista_c;                   //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
+
+    bubbleSortC(iniLista_c);
+
+    printf("Lista de todos os clientes ordenados por ordem alfabetica: \n");
     printf("%-8s %-25s %-18s %-20s %-14s %-20s\n", "Numero", "Nome", "Morada", "NIF","Telefone", "Email");
 
     while(aux != NULL){

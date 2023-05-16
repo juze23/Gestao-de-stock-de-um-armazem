@@ -78,7 +78,8 @@ int main(){
     int opP = 0, opC = 0, opV = 0;              //variável das opções dos menus secundários
     int res;
     int voltar_menu = 0;
-    cliente_aux.numero = 0;
+    cliente_aux.numero = 1;
+    int num_clientes;
 
     lerProdutosBin(&iniLista_p, &fimLista_p);
     lerClientesBin(&iniLista_c, &fimLista_c);
@@ -138,7 +139,7 @@ int main(){
 
                             break;
                         case 2:
-                            //AtualizarProduto(iniLista_p);  //envia as variáveis utilizadas
+                            AtualizarProduto(iniLista_p);  //envia as variáveis utilizadas
                             printf("Produto atualizado!\n");
                             system("pause");
                             break;
@@ -157,7 +158,6 @@ int main(){
                             system("pause");
                             break;
                         case 5:
-                            printf("Lista de todos os produtos ordenados por ordem alfabetica: \n");
                             listarProdutosAlfabetica(iniLista_p);
                             system("pause");
                             break;
@@ -198,9 +198,22 @@ int main(){
                             scanf("%[^\n]s", cliente_aux.morada);
                             fflush(stdin);
 
-                            printf("Insira o NIF do cliente:\n");
-                            scanf("%d", &cliente_aux.NIF);            
-                            fflush(stdin);
+                            
+                            do{
+                                printf("Insira o NIF do cliente:\n");
+                                scanf("%d", &cliente_aux.NIF);            
+                                fflush(stdin);
+                            
+                                res = verificarNIF(&iniLista_c,&cliente_aux.NIF);
+                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
+                            }while(res!=0);
+                            if (voltar_menu) {
+                                voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                break; // retorna ao menu
+                            }
 
                             printf("Insira o numero de telefone do cliente:\n");
                             scanf("%d", &cliente_aux.n_telefone);            
@@ -210,7 +223,9 @@ int main(){
                             scanf("%[^\n]s",cliente_aux.email);
                             fflush(stdin);
 
-                            cliente_aux.numero++;
+                            num_clientes = numeroclientes(iniLista_c);
+
+                            cliente_aux.numero += num_clientes;
 
                             AdicionarCliente(&iniLista_c, &fimLista_c, cliente_aux);
 
@@ -219,15 +234,17 @@ int main(){
 
                             break;
                         case 2:
+                            fflush(stdin);
+                            AtualizarCliente(iniLista_c);
+                            printf("Cliente atualizado");
                             break;
                         case 3:
-                            printf("Lista de todos os clientes ordenados por ordem alfabetica: \n");
                             listarClientesAlfabetica(iniLista_c);
                             system("pause");
                             break;
                         case 4:
                             int nif=0;
-                            printf("Insira o NIF do cliente que deseja ver:\n");
+                            printf("Insira o NIF do cliente que pretende listar:\n");
                             scanf("%d", &nif);
                             listarClientesNIF(nif, iniLista_c);
                             system("pause");

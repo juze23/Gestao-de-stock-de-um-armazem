@@ -79,10 +79,9 @@ int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento a
     return 0;
 }
 
-/*void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
+void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
 
     int codigoA=0;
-    int pos=0;
     int op=0;
     
     ELEMENTO_P *aux = iniLista_p;
@@ -91,10 +90,8 @@ int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento a
     printf("Insira o codigo do produto que deseja atualizar:\n");
     scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código
 
-    while(aux != NULL && strcasecmp(aux->lista_p.codigo_produto, codigoA) == 0){
-
-
-
+    while(aux->lista_p.codigo_produto != codigoA){
+        aux = aux->proximo;
     }
 
     printf("O que deseja atualizar do produto?");
@@ -124,7 +121,7 @@ int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento a
             printf("Nao existe essa opcao");
             break;
         }
-}*/
+}
 
 void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num){     //case 3
 
@@ -253,6 +250,8 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista_p){        //case 5
     aux = iniLista_p;
 
     bubbleSortP(iniLista_p);            //chama a função bubbleSort(depois temos que trocar para quickSort-algortimo cansado)
+
+    printf("Lista de todos os produtos ordenados por ordem alfabetica: \n");
 
 
     printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");

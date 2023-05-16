@@ -27,7 +27,7 @@ typedef struct elemento_p{
 
 void lerProdutosBin(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
 void AdicionarProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, PRODUTO newProduto);
-void AtualizarProduto(int *num_produtos,ELEMENTO_P *iniLista);
+void AtualizarProduto(ELEMENTO_P *iniLista);
 void removerProduto(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista, int num);
 void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista);
 void bubbleSortP(ELEMENTO_P *iniLista);
@@ -61,6 +61,9 @@ typedef struct elemento_c{
 
 void lerClientesBin(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c);
 void AdicionarCliente(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c, CLIENTE newCliente);
+int verificarNIF(ELEMENTO_C **iniLista_c, int *nif);
+int numeroclientes(ELEMENTO_C *iniLista_c);
+void AtualizarCliente(ELEMENTO_C *iniLista_c);
 void bubbleSortC(ELEMENTO_C *iniLista_c);
 void listarClientesAlfabetica(ELEMENTO_C *iniLista_c);
 void listarClientesNIF(int nif, ELEMENTO_C *iniLista_c);
