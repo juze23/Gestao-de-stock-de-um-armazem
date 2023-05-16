@@ -80,7 +80,7 @@ int main(){
     int voltar_menu = 0;
     cliente_aux.numero = 0;
 
-    //lerProdutosBin(&iniLista_p, &fimLista_p);
+    lerProdutosBin(&iniLista_p, &fimLista_p);
 
     do{
         system("cls");          //clear screen para limpar o ecrã depois de chamar a função desejada
@@ -173,8 +173,6 @@ int main(){
                             system("pause");
                             break;
                         case 0:
-                            //guardarProdutosBin(&iniLista_p, &fimLista_p);
-                            libertarLista(&iniLista_p, &fimLista_p);
                             printf("A voltar!\n");
                             sleep(1.5);
                             break;
@@ -266,7 +264,6 @@ int main(){
                     break;
             case 0:
                 printf("Saiu!\n");
-                return 0;
                 break;
             default:
                 printf("Opcao invalida");
@@ -275,7 +272,8 @@ int main(){
         }
     }while(op != 0);
 
-    guardarProdutosBin(&iniLista_p);
+    guardarProdutosBin(iniLista_p);
+    libertarLista(&iniLista_p, &fimLista_p);
         
     return 0;
 }

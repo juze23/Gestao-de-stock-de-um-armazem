@@ -35,7 +35,7 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista);
 void listarProdutosCategoria(char categoriaA[], ELEMENTO_P *iniLista);
 void valordostockatual(ELEMENTO_P *iniLista);
 int verificarcodigo(ELEMENTO_P **iniLista, int *codigo);
-void guardarProdutosBin(ELEMENTO_P **iniLista);
+void guardarProdutosBin(ELEMENTO_P *iniLista);
 void libertarLista(ELEMENTO_P **iniLista, ELEMENTO_P **fimLista);
 
 //Clientes

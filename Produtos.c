@@ -3,7 +3,7 @@
 #include <string.h>
 #include "structs.h"
 
-/*void lerProdutosBin(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //o programa não anda com isto | rever
+void lerProdutosBin(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //o programa não anda com isto | rever
 
     FILE *fp = NULL;
     PRODUTO produtos;
@@ -11,17 +11,15 @@
     fp = fopen("produtos.dat", "rb");
 
     if(fp == NULL){
-
-        printf("Erro ao ler do ficheiro");
         return;
     }
 
-    while(fread(&produtos, sizeof(ELEMENTO_P), 1, fp)==1){
+    while(fread(&produtos, sizeof(PRODUTO), 1, fp)==1){
 
         AdicionarProduto(iniLista_p, fimLista_p, produtos);
     }
     fclose(fp);
-}*/
+}
 
 void AdicionarProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, PRODUTO newProduto){    //case 1
 
@@ -315,27 +313,28 @@ void valordostockatual(ELEMENTO_P *iniLista_p){               //case 8
     }
 }
 
-void guardarProdutosBin(ELEMENTO_P **iniLista_p){          //o programa não anda com isto | rever
+void guardarProdutosBin(ELEMENTO_P *iniLista_p){          //o programa não anda com isto | rever
 
     FILE *fp = NULL;
-    ELEMENTO_P *aux = *iniLista_p;
+    ELEMENTO_P *aux = iniLista_p;
 
     fp = fopen("produtos.dat", "wb");
 
     if(fp == NULL){
 
         printf("Erro ao guardar no ficheiro");
+        
         return;
     }
 
     while(aux != NULL){
 
-        fwrite(&aux->lista_p, sizeof(ELEMENTO_P), 1, fp);
+        fwrite(&aux->lista_p, sizeof(PRODUTO), 1, fp);
         aux = aux->proximo;
     }
     fclose(fp);
 }
-
+//ENVIAR PARA O GONÇALO :)
 void libertarLista(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //case 0
 
     ELEMENTO_P *aux = *iniLista_p, *proximo = NULL;
