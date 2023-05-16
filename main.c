@@ -174,7 +174,7 @@ int main(){
                             break;
                         case 0:
                             printf("A voltar!\n");
-                            sleep(1.5);
+                            sleep(1);
                             break;
                         default:
                             printf("Opcao invalida!");
@@ -233,7 +233,7 @@ int main(){
                             break;
                         case 0:
                             printf("A voltar!\n");
-                            sleep(1.5);
+                            sleep(1);
                             break;
                         default:
                             printf("Opcao invalida!\n");
@@ -253,7 +253,7 @@ int main(){
                                 break;
                             case 0:
                                 printf("A voltar!\n");
-                                sleep(1.5);
+                                sleep(1);
                                 break; 
                             default:
                             printf("Opcao invalida!\n");
