@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "structs.h"
+#include <time.h>
 
 int menu(){
 
@@ -65,13 +66,15 @@ int menuProduto(){
 
 int main(){
 
-    PRODUTO produtos_aux;     //variável da struct produtos
-    CLIENTE cliente_aux;
+    struct tm data_tm;
 
-    ELEMENTO_P *iniLista_p=NULL;
+    PRODUTO produtos_aux;     //variável da struct produtos
+    CLIENTE cliente_aux;      //variável da struct clientes
+
+    ELEMENTO_P *iniLista_p=NULL;        //ini e fim da lista dos produtos
     ELEMENTO_P *fimLista_p=NULL;
 
-    ELEMENTO_C *iniLista_c=NULL;
+    ELEMENTO_C *iniLista_c=NULL;        //ini e fim da lista dos clientes
     ELEMENTO_C *fimLista_c=NULL;
     
     int op = 0;                     //variável da opção do menu principal
