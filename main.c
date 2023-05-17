@@ -66,7 +66,7 @@ int menuProduto(){
 
 int main(){
 
-    struct tm data_tm;
+    //struct tm data_tm;
 
     PRODUTO produtos_aux;     //variável da struct produtos
     CLIENTE cliente_aux;      //variável da struct clientes
@@ -127,13 +127,31 @@ int main(){
                             scanf("%d", &produtos_aux.quantidade);
                             fflush(stdin);
 
+                            if(produtos_aux.quantidade < 0){
+                                printf("A quantidade não pode ser negativa!\n");
+                                system("pause");
+                                break;
+                            }
+
                             printf("Insira o preco de compra do produto (sem usar virgulas):\n");
                             scanf("%f", &produtos_aux.compra);
                             fflush(stdin);
 
+                            if(produtos_aux.compra < 0){
+                                printf("O preco de compra não pode ser negativo!\n");
+                                system("pause");
+                                break;
+                            }
+
                             printf("Insira o preco de venda do produto (sem usar virgulas):\n");
                             scanf("%f", &produtos_aux.venda);
                             fflush(stdin);
+
+                            if(produtos_aux.venda < 0){
+                                printf("O preco de venda não pode ser negativo!\n");
+                                system("pause");
+                                break;
+                            }
 
                             AdicionarProduto(&iniLista_p, &fimLista_p, produtos_aux);
 
@@ -208,7 +226,6 @@ int main(){
                             scanf("%[^\n]s", cliente_aux.morada);
                             fflush(stdin);
 
-                            
                             do{
                                 printf("Insira o NIF do cliente:\n");
                                 scanf("%d", &cliente_aux.NIF);            
@@ -225,13 +242,25 @@ int main(){
                                 break; // retorna ao menu
                             }
 
+                            if(cliente_aux.NIF <= 100000000 || cliente_aux.NIF >= 999999999){
+                                printf("O numero inserido nao possui 9 digitos!\n");
+                                break;
+                            }
+
                             printf("Insira o numero de telefone do cliente:\n");
                             scanf("%d", &cliente_aux.n_telefone);            
                             fflush(stdin);
 
+                                if(cliente_aux.n_telefone <= 100000000 || cliente_aux.n_telefone >= 999999999){
+                                printf("O numero inserido nao possui 9 digitos!\n");
+                                break;
+                            }
+
                             printf("Insira o email do cliente:\n");
                             scanf("%[^\n]s",cliente_aux.email);
                             fflush(stdin);
+
+                            //verificar se é email
 
                             num_clientes = numeroclientes(iniLista_c);
 
