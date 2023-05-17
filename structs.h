@@ -9,7 +9,7 @@ typedef struct produto{
     int codigo_produto;
     char nome_produto[32];
     char categoria[32];
-    //data de validade
+    char data_validade[15];
     int quantidade;
     float compra;
     float venda;

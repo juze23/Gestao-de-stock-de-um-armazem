@@ -66,7 +66,9 @@ int menuProduto(){
 
 int main(){
 
-    //struct tm data_tm;
+    time_t mytime;              //time.h
+    mytime = time(NULL);
+    struct tm tm = *localtime(&mytime);
 
     PRODUTO produtos_aux;     //variável da struct produtos
     CLIENTE cliente_aux;      //variável da struct clientes
@@ -188,6 +190,10 @@ int main(){
                             printf("Insira a categoria de produtos que deseja listar:\n");
                             scanf("%[^\n]s", categoriaA);
                             listarProdutosCategoria(categoriaA, iniLista_p);
+                            system("pause");
+                            break;
+                        case 7:
+                            printf("Data: %d/%d/%d\n", tm.tm_mday, tm.tm_mon+1,tm.tm_year+1900);
                             system("pause");
                             break;
                         case 8:
