@@ -123,52 +123,47 @@ void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
         }
 }
 
-void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num){     //case 3
-
+void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num) {
     ELEMENTO_P *aux = NULL;
 
-    if(*iniLista_p == NULL){
-
-        printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
+    if (*iniLista_p == NULL) {
+        printf("Lista vazia!\n");
         return;
-    }else {
+    } else {
         printf("Produto removido!\n");
     }
     
     aux = *iniLista_p;  
 
-    while(aux!=NULL && aux->lista_p.codigo_produto != num){
-
+    while (aux != NULL && aux->lista_p.codigo_produto != num) {
         aux = aux->proximo;
     }
 
-    if(aux == NULL){
-
-        return;         //se não houver produto a seguir, retorna ao menu
+    if (aux == NULL) {
+        return;
     }
-    if(aux->anterior == NULL){
-        *iniLista_p = aux->proximo;
-        if(*iniLista_p!=NULL){
 
+    if (aux->anterior == NULL) {
+        *iniLista_p = aux->proximo;
+        if (*iniLista_p != NULL) {
             (*iniLista_p)->anterior = NULL;
         }
+    } else {
+        aux->anterior->proximo = aux->proximo;
     }
-    else{
-        aux->proximo->anterior = aux->proximo;
-    }
-    if(aux->proximo == NULL){
 
+    if (aux->proximo == NULL) {
         *fimLista_p = aux->anterior;
-        if(*fimLista_p != NULL){
-
-            (*fimLista_p)->proximo=NULL;
+        if (*fimLista_p != NULL) {
+            (*fimLista_p)->proximo = NULL;
         }
-    }
-    else{
+    } else {
         aux->proximo->anterior = aux->anterior;
-        free(aux);
     }
+
+    free(aux);
 }
+
 
 void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista_p){                  //case 4
 
