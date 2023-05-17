@@ -307,6 +307,14 @@ void valordostockatual(ELEMENTO_P *iniLista_p){               //case 8
     }
 }
 
+/*void relatorioProdutos(){
+
+
+
+
+
+}*/
+
 void guardarProdutosBin(ELEMENTO_P *iniLista_p){          //o programa não anda com isto | rever
 
     FILE *fp = NULL;
