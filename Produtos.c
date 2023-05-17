@@ -307,13 +307,44 @@ void valordostockatual(ELEMENTO_P *iniLista_p){               //case 8
     }
 }
 
-/*void relatorioProdutos(){
+void relatorioProdutos(int stock, ELEMENTO_P *iniLista_p){
 
+    FILE *fp = NULL;
+    ELEMENTO_P *aux = iniLista_p;
+    int produtosEncontrados = 0;
 
+    fp = fopen("relatorioProdutos","w");
 
+    if(fp == NULL){
 
+        printf("Erro a guardar no ficheiro");
+        return;
+    }
 
-}*/
+    fprintf(fp, "%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
+
+    while(aux != NULL){
+
+        if(aux->lista_p.quantidade < stock){
+
+            fprintf(fp, "%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+            produtosEncontrados = 1;
+        }
+        aux = aux->proximo;
+    }
+    if (!produtosEncontrados) {
+
+        printf("Nao existem produtos com stock abaixo do do nivel minimo inserido!\n");
+        fprintf(fp, "\nNao existem produtos com stock abaixo do do nivel minimo inserido.\n");
+    }
+
+    if(produtosEncontrados == 1){
+
+        printf("Relatorio criado!\n");
+    }
+
+    fclose(fp);
+}
 
 void guardarProdutosBin(ELEMENTO_P *iniLista_p){          //o programa não anda com isto | rever
 

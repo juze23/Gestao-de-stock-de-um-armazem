@@ -177,7 +177,8 @@ int main(){
                             int stock;
                             printf("Insira o valor minimo de stock establecido pela impresa:\n");
                             scanf("%d", &stock);
-                            //relatorioProdutos()
+                            relatorioProdutos(stock, iniLista_p);
+                            system("pause");
                             break;
                         case 0:
                             printf("A voltar!\n");
