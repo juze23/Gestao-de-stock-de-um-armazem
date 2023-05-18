@@ -38,7 +38,9 @@ int menuVendas(){
     int op = 0;
     printf("\n*** Registo de vendas do armazem ***\n\n");
     printf("\n1 - Registar vendas de produtos");
-    printf("\n2 - Criacao de relatorios de vendas");
+    printf("\n2 - Criacao de relatorios de vendas diarias");
+    printf("\n3 - Criacao de relatorios de vendas mensais");
+    printf("\n4 - Criacao de relatorios de vendas anuais");
     printf("\n0 - Voltar");
     printf("\n> ");
     scanf("%d", &op);       //recebe a opção
@@ -326,6 +328,10 @@ int main(){
                             case 1:
                                 break;
                             case 2:
+                                break;
+                            case 3:
+                                break;
+                            case 4:
                                 break;
                             case 0:
                                 printf("A voltar!\n");
