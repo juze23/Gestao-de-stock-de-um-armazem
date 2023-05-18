@@ -1,2 +1,4 @@
 Codigo   Nome                      Categoria          Data de validade     Quantidade     Preco de compra      Preco de venda
-123      alface                    vegetal            data de validade     2              5.00                 10.00       
+55       bife                      carne              20/05/2023           2              10.00                30.00       
+75       cavala                    peixe              17/05/2023           2              10.00                30.00       
+555      paulo                     paulo              25/04/2023           1              1.00                 1.00        

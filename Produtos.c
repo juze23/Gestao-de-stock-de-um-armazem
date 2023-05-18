@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "structs.h"
+#include <time.h>
 
 void lerProdutosBin(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p){       //o programa não anda com isto | rever
 
@@ -199,7 +200,7 @@ void listarProdutosCodigo(int cod, ELEMENTO_P *iniLista_p){                  //c
 
         if(aux->lista_p.codigo_produto == cod){
             
-            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
 
         }
         aux = aux->proximo;     //correr os produtos todos até encontrar o produto com o codigo igual
@@ -253,7 +254,7 @@ void listarProdutosAlfabetica(ELEMENTO_P *iniLista_p){        //case 5
 
     while(aux != NULL){
         
-        printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+        printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
         aux = aux->proximo; // percorrer todos os produtos
     }
 
@@ -278,10 +279,52 @@ void listarProdutosCategoria(char categoriaA[], ELEMENTO_P *iniLista_p){      //
     while(aux!=NULL){ 
         if(strcasecmp(aux->lista_p.categoria, categoriaA)==0){
         
-        printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
         }
         aux = aux->proximo; // percorrer todos os produtos
     }
+}
+
+void verificarDataValidade(ELEMENTO_P *iniLista_p){
+
+    time_t mytime = time(NULL);                   //time.h
+    struct tm *dataAtual = localtime(&mytime);
+    int diaAtual = dataAtual->tm_mday;
+    int mesAtual = dataAtual->tm_mon+1;
+    int anoAtual = dataAtual->tm_year+1900;
+
+    ELEMENTO_P *aux = NULL;
+    int dia=0, mes=0, ano=0;
+
+    if(iniLista_p == NULL){
+
+        printf("Lista vazia!\n");       //caso ocorra um erro na lista, retornar ao menu
+        return;
+    }
+
+    aux = iniLista_p;
+    printf("Lista dos produtos com data de validade vencida:\n");
+
+    printf("%-8s %-25s %-18s %-20s %-14s %-20s %-12s\n", "Codigo", "Nome", "Categoria", "Data de validade", "Quantidade", "Preco de compra", "Preco de venda");
+
+    while(aux != NULL){
+
+        if(sscanf(aux->lista_p.data_validade, "%d/%d/%d", &dia, &mes, &ano) != 3){
+
+            printf("Erro!\n");
+            return;
+        }
+
+        if(ano < anoAtual){
+            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+        }else if(mes < mesAtual){
+            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+        }else if(dia < diaAtual){
+            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+        }
+
+    aux = aux->proximo;
+    }    
 }
 
 void valordostockatual(ELEMENTO_P *iniLista_p){               //case 8
@@ -327,7 +370,7 @@ void relatorioProdutos(int stock, ELEMENTO_P *iniLista_p){
 
         if(aux->lista_p.quantidade < stock){
 
-            fprintf(fp, "%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, "data de validade", aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
+            fprintf(fp, "%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
             produtosEncontrados = 1;
         }
         aux = aux->proximo;

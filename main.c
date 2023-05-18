@@ -66,9 +66,7 @@ int menuProduto(){
 
 int main(){
 
-    time_t mytime;              //time.h
-    mytime = time(NULL);
-    struct tm tm = *localtime(&mytime);
+    struct tm novaData;
 
     PRODUTO produtos_aux;     //variável da struct produtos
     CLIENTE cliente_aux;      //variável da struct clientes
@@ -117,9 +115,23 @@ int main(){
                             scanf("%[^\n]s", produtos_aux.nome_produto);
                             fflush(stdin);
 
-                            //printf("Insira a data de validade do produto: ")
-                            //scanf("%?", produtos.data);
-                            //fflush(stdin);
+                            printf("Insira a data de validade do produto (formato DD/MM/YYYY):\n");
+                            scanf("%s", produtos_aux.data_validade);
+                            fflush(stdin);
+
+                            if(sscanf(produtos_aux.data_validade, "%d/%d/%d", &novaData.tm_mday, &novaData.tm_mon, &novaData.tm_year) != 3){
+                                printf("Erro!\n");
+                                system("pause");
+                                break;
+                            }
+                            novaData.tm_mon -= 1;
+                            novaData.tm_year -= 1900;
+
+                            time_t data = mktime(&novaData);
+
+                            if(data == -1){
+                                printf("Erro!\n");
+                            }
 
                             printf("Insira a categoria do produto:\n");
                             scanf("%[^\n]s", produtos_aux.categoria);
@@ -193,7 +205,7 @@ int main(){
                             system("pause");
                             break;
                         case 7:
-                            printf("Data: %d/%d/%d\n", tm.tm_mday, tm.tm_mon+1,tm.tm_year+1900);
+                            verificarDataValidade(iniLista_p);
                             system("pause");
                             break;
                         case 8:

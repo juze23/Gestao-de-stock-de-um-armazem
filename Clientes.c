@@ -133,6 +133,7 @@ void AtualizarCliente(ELEMENTO_C *iniLista_c){
             printf("Insira o novo email do cliente:\n");
             fflush(stdin);
             scanf("%[^\n]s", aux->lista_c.email);
+            break;
         case 4:
             printf("Insira a nova morada do cliente:\n");
             fflush(stdin);
