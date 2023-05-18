@@ -115,7 +115,7 @@ void AtualizarCliente(ELEMENTO_C *iniLista_c) {
     printf("\n1 - Morada do cliente");
     printf("\n2 - Numero de telefone do cliente");
     printf("\n3 - Email do cliente");
-    printf("\n4 - Ambos");
+    printf("\n4 - Todas as anteriores");
     printf("\n> ");
     scanf("%d", &op);
 
@@ -149,10 +149,13 @@ void AtualizarCliente(ELEMENTO_C *iniLista_c) {
             scanf(" %[^\n]s", aux->lista_c.email);
             break;
         default:
-            printf("Nao existe essa opcao");
+            printf("Nao existe essa opcao!\n");
+            return;             //tem que retornar para o switch case aq
             break;
     }
-    printf("Cliente atualizado");
+    if(op == 1 || op == 2 || op == 3 || op == 4 || op == 5){
+        printf("Cliente atualizado!\n");
+    }
 }
 
 

@@ -125,9 +125,12 @@ void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
             break;
         default:
             printf("Nao existe essa opcao");
+                        //aq tem que retornar ao switch case
             break;
         }
-        printf("Produto atualizado!\n");
+        if(op == 1 || op == 2 || op == 3){
+            printf("Produto atualizado!\n");
+        }
 }
 
 
