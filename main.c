@@ -259,8 +259,9 @@ int main(){
                                 break; // retorna ao menu
                             }
 
-                            if(cliente_aux.NIF <= 100000000 || cliente_aux.NIF >= 999999999){
+                            if(cliente_aux.NIF < 100000000 || cliente_aux.NIF > 999999999){
                                 printf("O numero inserido nao possui 9 digitos!\n");
+                                system("pause");
                                 break;
                             }
 
@@ -268,8 +269,9 @@ int main(){
                             scanf("%d", &cliente_aux.n_telefone);            
                             fflush(stdin);
 
-                                if(cliente_aux.n_telefone <= 100000000 || cliente_aux.n_telefone >= 999999999){
+                            if(cliente_aux.n_telefone < 100000000 || cliente_aux.n_telefone > 999999999){
                                 printf("O numero inserido nao possui 9 digitos!\n");
+                                system("pause");
                                 break;
                             }
 
