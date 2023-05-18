@@ -145,6 +145,9 @@ int main(){
 
                             if(produtos_aux.quantidade < 0){
                                 printf("A quantidade não pode ser negativa!\n");
+
+                                //função para perguntar se quer retornar ou colocar outra quantidade
+
                                 system("pause");
                                 break;
                             }
@@ -155,6 +158,9 @@ int main(){
 
                             if(produtos_aux.compra < 0){
                                 printf("O preco de compra não pode ser negativo!\n");
+
+                                //função para perguntar se quer retornar ou colocar outro preco de compra
+
                                 system("pause");
                                 break;
                             }
@@ -165,6 +171,9 @@ int main(){
 
                             if(produtos_aux.venda < 0){
                                 printf("O preco de venda não pode ser negativo!\n");
+
+                                //função para perguntar se quer retornar ou colocar outro preco de venda
+
                                 system("pause");
                                 break;
                             }
@@ -263,6 +272,9 @@ int main(){
 
                             if(cliente_aux.NIF < 100000000 || cliente_aux.NIF > 999999999){
                                 printf("O numero inserido nao possui 9 digitos!\n");
+                                
+                                //função para perguntar se quer retornar ou colocar outro NIF
+
                                 system("pause");
                                 break;
                             }
@@ -273,6 +285,9 @@ int main(){
 
                             if(cliente_aux.n_telefone < 100000000 || cliente_aux.n_telefone > 999999999){
                                 printf("O numero inserido nao possui 9 digitos!\n");
+
+                                //função para perguntar se quer retornar ou colocar outro numero de telefone
+
                                 system("pause");
                                 break;
                             }

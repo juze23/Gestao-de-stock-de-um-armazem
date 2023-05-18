@@ -72,4 +72,27 @@ void listarClientesNIF(int nif, ELEMENTO_C *iniLista_c);
 void guardarClientesBin(ELEMENTO_C *iniLista_c);
 void libertarListaClientes(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c);
 
+
+/*typedef struct vendas{
+
+    char nome[50];
+    char morada[50];
+    char email[50];
+    int NIF;
+    int n_telefone;
+    int numero;
+
+    char nome_produto[32];
+    int quantidade_vendida;
+    char data_venda[15]
+}VENDAS;
+
+typedef struct elemento_v{
+
+    VENDAS lista_v;
+    struct elemento_v *proximo;
+    struct elemento_v *anterior;
+
+}ELEMENTO_V*/
+
 #endif
