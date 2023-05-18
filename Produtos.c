@@ -91,8 +91,13 @@ void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
     printf("Insira o codigo do produto que deseja atualizar:\n");
     scanf("%d", &codigoA);                  //saber que produto deseja alterar através do código
 
-    while(aux->lista_p.codigo_produto != codigoA){
+    while(aux != NULL && aux->lista_p.codigo_produto != codigoA){
         aux = aux->proximo;
+    }
+
+     if (aux == NULL) {
+        printf("Codigo de produto nao encontrado\n");
+        return;
     }
 
     printf("O que deseja atualizar do produto?");
@@ -122,7 +127,9 @@ void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
             printf("Nao existe essa opcao");
             break;
         }
+        printf("Produto atualizado!\n");
 }
+
 
 void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num) {
     ELEMENTO_P *aux = NULL;

@@ -50,7 +50,7 @@ int menuProduto(){
     int op = 0;
     printf("\n*** Gestao de Stock de um armazem de distribuicao de alimentos ***\n\n");
     printf("\n1 - Adicionar produto ao stock");
-    printf("\n2 - Atualizar as informacoes de um produto existente - incompleto");
+    printf("\n2 - Atualizar as informacoes de um produto existente");
     printf("\n3 - Remover um produto do stock");
     printf("\n4 - Apresentar informacoes de um produto");
     printf("\n5 - Listar todos os produtos em stock por ordem alfabetica");
@@ -175,7 +175,6 @@ int main(){
                             break;
                         case 2:
                             AtualizarProduto(iniLista_p);  //envia as variáveis utilizadas
-                            printf("Produto atualizado!\n");
                             system("pause");
                             break;
                         case 3:
@@ -293,7 +292,7 @@ int main(){
                         case 2:
                             fflush(stdin);
                             AtualizarCliente(iniLista_c);
-                            printf("Cliente atualizado");
+                            system("Pause");
                             break;
                         case 3:
                             listarClientesAlfabetica(iniLista_c);

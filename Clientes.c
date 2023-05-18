@@ -93,21 +93,23 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
 }
 
 
-void AtualizarCliente(ELEMENTO_C *iniLista_c){
-
+void AtualizarCliente(ELEMENTO_C *iniLista_c) {
     int nif;
-    int op=0;
+    int op = 0;
     
-
     ELEMENTO_C *aux = iniLista_c;
 
     printf("Insira o NIF do cliente que deseja atualizar:\n");
     scanf("%d", &nif);
 
-    while(aux->lista_c.NIF != nif){
+    while (aux != NULL && aux->lista_c.NIF != nif) {
         aux = aux->proximo;
     }
 
+    if (aux == NULL) {
+        printf("NIF nao encontrado\n");
+        return;
+    }
 
     printf("O que deseja atualizar do cliente?");
     printf("\n1 - Morada do cliente");
@@ -117,40 +119,40 @@ void AtualizarCliente(ELEMENTO_C *iniLista_c){
     printf("\n> ");
     scanf("%d", &op);
 
-    switch (op){            //opções para substituir informações já existentes
-
+    switch (op) {
         case 1:
             printf("Insira a nova morada do cliente:\n");
             fflush(stdin);
-            scanf("%[^\n]s", aux->lista_c.morada);
+            scanf(" %[^\n]s", aux->lista_c.morada);
             break;
         case 2:
-            printf("Insira o novo preco de venda do produto:\n");
+            printf("Insira o novo numero de telefone do cliente:\n");
             fflush(stdin);
             scanf("%d", &aux->lista_c.n_telefone);
             break;
         case 3:
             printf("Insira o novo email do cliente:\n");
             fflush(stdin);
-            scanf("%[^\n]s", aux->lista_c.email);
+            scanf(" %[^\n]s", aux->lista_c.email);
             break;
         case 4:
             printf("Insira a nova morada do cliente:\n");
             fflush(stdin);
-            scanf("%[^\n]s", aux->lista_c.morada);
+            scanf(" %[^\n]s", aux->lista_c.morada);
 
-            printf("Insira o novo preco de venda do produto:\n");
+            printf("Insira o novo numero de telefone do cliente:\n");
             fflush(stdin);
             scanf("%d", &aux->lista_c.n_telefone);
 
             printf("Insira o novo email do cliente:\n");
             fflush(stdin);
-            scanf("%[^\n]s", aux->lista_c.email);
+            scanf(" %[^\n]s", aux->lista_c.email);
             break;
         default:
             printf("Nao existe essa opcao");
             break;
-        }
+    }
+    printf("Cliente atualizado");
 }
 
 
