@@ -73,12 +73,12 @@ void guardarClientesBin(ELEMENTO_C *iniLista_c);
 void libertarListaClientes(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c);
 
 
-/*typedef struct vendas{
+typedef struct vendas{
 
     int numero_cliente;
     int numero_produto;
     int quantidade_vendida;
-    char data_venda[15]
+    char data_venda[15];
 
 }VENDAS;
 
@@ -88,6 +88,14 @@ typedef struct elemento_v{
     struct elemento_v *proximo;
     struct elemento_v *anterior;
 
-}ELEMENTO_V*/
+}ELEMENTO_V;
+
+void lerVendasBin(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v);
+
+void registarVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v, VENDAS novaVenda);
+void relatorioDiario(ELEMENTO_V *iniLista_v);
+
+void guardarVendasBin(ELEMENTO_V *iniLista_v);
+void libertarListaVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v);
 
 #endif

@@ -72,6 +72,7 @@ int main(){
 
     PRODUTO produtos_aux;     //variável da struct produtos
     CLIENTE cliente_aux;      //variável da struct clientes
+    VENDAS vendas_aux;
 
     ELEMENTO_P *iniLista_p=NULL;        //ini e fim da lista dos produtos
     ELEMENTO_P *fimLista_p=NULL;
@@ -79,6 +80,9 @@ int main(){
     ELEMENTO_C *iniLista_c=NULL;        //ini e fim da lista dos clientes
     ELEMENTO_C *fimLista_c=NULL;
     
+    ELEMENTO_V *iniLista_v=NULL;
+    ELEMENTO_V *fimLista_v=NULL;
+
     int op = 0;                     //variável da opção do menu principal
     int opP = 0, opC = 0, opV = 0;              //variável das opções dos menus secundários
     int res;
@@ -88,6 +92,7 @@ int main(){
 
     lerProdutosBin(&iniLista_p, &fimLista_p);
     lerClientesBin(&iniLista_c, &fimLista_c);
+    lerVendasBin(&iniLista_v, &fimLista_v);
 
     do{
         system("cls");          //clear screen para limpar o ecrã depois de chamar a função desejada
@@ -341,8 +346,55 @@ int main(){
                     opV = menuVendas();
                         switch (opV){
                             case 1:
+
+                                printf("Insira o numero do cliente:\n");
+                                scanf("%d", &vendas_aux.numero_cliente);
+                                fflush(stdin);
+
+                                //verificação
+
+                                printf("Insira o codigo do produto vendido:\n");
+                                scanf("%d", &vendas_aux.numero_produto);
+                                fflush(stdin);
+
+                                //verificação
+
+                                printf("Insira a quantidade vendida:\n");
+                                scanf("%d", &vendas_aux.quantidade_vendida);
+                                fflush(stdin);
+
+                                //decrementar na quantidade do produto e caso n tenha a quantidade inserida, avisar
+
+                                printf("Insira a data de venda do produto (formato DD/MM/YYYY):\n");
+                                scanf("%s", vendas_aux.data_venda);
+                                fflush(stdin);
+
+                                if(sscanf(vendas_aux.data_venda, "%d/%d/%d", &novaData.tm_mday, &novaData.tm_mon, &novaData.tm_year) != 3){
+
+                                    printf("Erro!\n");
+                                    system("pause");
+                                    break;
+                                }
+                                novaData.tm_mon -= 1;
+                                novaData.tm_year -= 1900;
+
+                                time_t data = mktime(&novaData);
+
+                                if(data == -1){
+
+                                    printf("Erro!\n");
+                                }
+
+                                registarVendas(&iniLista_v, &fimLista_v, vendas_aux);
+
+                                printf("Venda registada!\n");
+                                system("pause");
+
                                 break;
                             case 2:
+
+                                relatorioDiario(iniLista_v);
+                                system("pause");
                                 break;
                             case 3:
                                 break;
@@ -371,9 +423,11 @@ int main(){
 
     guardarProdutosBin(iniLista_p);    
     guardarClientesBin(iniLista_c);
+    guardarVendasBin(iniLista_v);
     
     libertarListaProdutos(&iniLista_p, &fimLista_p);
     libertarListaClientes(&iniLista_c, &fimLista_c);
+    libertarListaVendas(&iniLista_v, &fimLista_v);
         
     return 0;
 }
