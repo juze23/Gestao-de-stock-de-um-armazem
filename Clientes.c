@@ -71,6 +71,8 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
     ELEMENTO_C *aux = *iniLista_c;
     int digitos = 9;
 
+    //Verificação se o NIF já existe
+
     while(aux != NULL){
         if(*nif == aux->lista_c.NIF){          //percorre a lista para verificar se os codigos dos produtos são iguais
 
@@ -90,6 +92,9 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
         }
         aux = aux->proximo;
     }
+
+    //Verificação se o NIF tem 9 digitos
+    
     int temp = *nif;
     int digitos_lidos = 0;
     char resposta2[3];
