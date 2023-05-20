@@ -22,16 +22,68 @@ void lerVendasBin(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v){
     fclose(fp);
 }
 
-void verificarCliente(){
+int verificarCliente(ELEMENTO_C *iniLista_c, int num_cliente){
 
+    ELEMENTO_C *aux = iniLista_c;
+    char resposta[3];
 
+    while(aux != NULL && aux->lista_c.numero != num_cliente){
+        aux = aux->proximo;
+    }
+     
+    if(aux == NULL){
+        printf("Numero nao encontrado\n");
+        printf("Deseja inserir outro numero?(S/N)");
+        scanf("%s", resposta);
 
+        if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0)
+        { // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+            return -1;
+        }
+        else if (strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não") == 0)
+        { // se responder que não ele volta para o menu
+            return -2;
+        }
+        else
+        {
+            printf("Opção inválida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
+            return -2;
+        }
+    }
+    return 0;
 }
 
-void verificarProduto(){
+int verificarProduto(ELEMENTO_P *iniLista_p, int codigo_produto){
+    ELEMENTO_P *aux = iniLista_p;
+    char resposta[3];
 
+    
+    while (aux != NULL && aux->lista_p.codigo_produto != codigo_produto)
+    {
+    aux = aux->proximo;
+    }
+       
+    if (aux == NULL)
+    {
+        printf("Codigo de produto nao encontrado\n");
+        printf("Deseja inserir outro numero?(S/N)");
+        scanf("%s", resposta);
 
-
+        if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0)
+        { // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+            return -1;
+        }
+        else if (strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não") == 0)
+        { // se responder que não ele volta para o menu
+            return -2;
+        }
+        else
+        {
+            printf("Opção inválida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
+            return -2;
+        }
+    }
+    return 0;
 }
 
 void decrementarQuantidade(){

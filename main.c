@@ -275,15 +275,6 @@ int main(){
                                 break; // retorna ao menu
                             }
 
-                            if(cliente_aux.NIF < 100000000 || cliente_aux.NIF > 999999999){
-                                printf("O numero inserido nao possui 9 digitos!\n");
-                                
-                                //função para perguntar se quer retornar ou colocar outro NIF
-
-                                system("pause");
-                                break;
-                            }
-
                             printf("Insira o numero de telefone do cliente:\n");
                             scanf("%d", &cliente_aux.n_telefone);            
                             fflush(stdin);
@@ -302,6 +293,17 @@ int main(){
                             fflush(stdin);
 
                             //verificar se é email
+
+                            char *arroba = strchr(cliente_aux.email, '@'); // procura a presença de um arroba no email
+
+                            char *ponto = strchr(cliente_aux.email, '.'); // procura a presença de um ponto no email
+
+                            if (arroba == NULL || ponto == NULL)
+                            { // Se o email não tiver arroba ou ponto ou os dois, volta ao menu
+                                printf("Email invalido. A voltar ao menu.\n");
+                                system("pause");
+                                break;
+                            }
 
                             num_clientes = numeroclientes(iniLista_c);
 
@@ -346,18 +348,39 @@ int main(){
                     opV = menuVendas();
                         switch (opV){
                             case 1:
-
+                                do{
                                 printf("Insira o numero do cliente:\n");
                                 scanf("%d", &vendas_aux.numero_cliente);
                                 fflush(stdin);
 
-                                //verificação
+                                res = verificarCliente(iniLista_c, vendas_aux.numero_cliente);
+                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
 
+                                }while(res != 0);
+                                if (voltar_menu) {
+                                    voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                    break; // retorna ao menu
+                                }
+                                
+                                do{
                                 printf("Insira o codigo do produto vendido:\n");
                                 scanf("%d", &vendas_aux.numero_produto);
                                 fflush(stdin);
 
-                                //verificação
+                                res = verificarProduto(iniLista_p,vendas_aux.numero_produto);
+                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
+
+                                }while(res != 0);
+                                if (voltar_menu) {
+                                    voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                    break; // retorna ao menu
+                                }
 
                                 printf("Insira a quantidade vendida:\n");
                                 scanf("%d", &vendas_aux.quantidade_vendida);

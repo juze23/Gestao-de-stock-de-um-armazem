@@ -69,12 +69,13 @@ int numeroclientes(ELEMENTO_C *iniLista_c){
 int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
 
     ELEMENTO_C *aux = *iniLista_c;
+    int digitos = 9;
 
     while(aux != NULL){
         if(*nif == aux->lista_c.NIF){          //percorre a lista para verificar se os codigos dos produtos são iguais
 
             printf("Esse NIF ja existe.\n");
-            printf("Deseja inserir outro NIF?(S/N)\n");
+            printf("Deseja inserir outro NIF?(S/N) \n");
             char resposta[3];
             scanf("%s", resposta);
 
@@ -89,9 +90,34 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
         }
         aux = aux->proximo;
     }
+    int temp = *nif;
+    int digitos_lidos = 0;
+    char resposta2[3];
+
+    while (temp != 0)
+    { // O loop while divide repetidamente o valor de temp por 10 até que o valor se torne zero
+        temp /= 10;
+        digitos_lidos++;
+    }
+
+    if (digitos_lidos != digitos)
+    { // Esta linha verifica se o número de dígitos lidos  é diferente do número desejado de dígitos que é 9
+        printf("O NIF inserido nao possui 9 digitos!\n");
+        system("pause");
+        printf("Deseja introduzir outro(S/N)?");
+        scanf("%s", resposta2);
+        if (strcasecmp(resposta2, "S") == 0 || strcasecmp(resposta2, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+                return -1;
+            }else if(strcasecmp(resposta2, "N") == 0 || strcasecmp(resposta2, "nao") || strcasecmp(resposta2, "não")== 0){  // se responder que não ele volta para o menu
+                return -2;
+            }else{
+                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                return -2;
+            }
+    }
+
     return 0;
 }
-
 
 void AtualizarCliente(ELEMENTO_C *iniLista_c) {
     int nif;
