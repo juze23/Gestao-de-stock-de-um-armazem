@@ -420,8 +420,14 @@ int main(){
                                 system("pause");
                                 break;
                             case 3:
+
+                                relatorioMensal(iniLista_v);
+                                system("pause");
                                 break;
                             case 4:
+
+                                relatorioAnual(iniLista_v);
+                                system("pause");
                                 break;
                             case 0:
                                 printf("A voltar!\n");

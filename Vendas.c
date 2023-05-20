@@ -142,7 +142,7 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
         return;
     }
 
-    fprintf(fp, "%-15s %-15s %-15s %-20s\n", "Cliente", "Produto", "Quantidade", "Data de venda");
+    fprintf(fp, "%-15s %-15s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
 
     while(aux != NULL){
 
@@ -174,7 +174,108 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
     fclose(fp);
 }
 
+void relatorioMensal(ELEMENTO_V *iniLista_v){
 
+    time_t mytime = time(NULL);                   //time.h
+    struct tm *dataAtual = localtime(&mytime);
+    int mesAtual = dataAtual->tm_mon+1;
+    int anoAtual = dataAtual->tm_year+1900;
+
+    ELEMENTO_V *aux = iniLista_v;
+    FILE *fp = NULL;
+    int vendasEncontradas = 0;
+    int dia=0, mes=0, ano=0;
+
+    fp = fopen("relatorioMensal","w");
+
+    if(fp == NULL){
+
+        printf("Erro a guardar no ficheiro");
+        return;
+    }
+
+    fprintf(fp, "%-15s %-15s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+
+    while(aux != NULL){
+
+        if(sscanf(aux->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
+
+            printf("Erro!\n");
+            return;
+        }
+
+        if(ano == anoAtual && mes == mesAtual){
+            
+            fprintf(fp, "%-15d %-15d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            vendasEncontradas = 1;
+
+        }    
+        aux = aux->proximo;
+    }
+    if (!vendasEncontradas) {
+
+        printf("Nao existem produtos com stock abaixo do do nivel minimo inserido!\n");
+        fprintf(fp, "\nNao existem produtos com stock abaixo do do nivel minimo inserido.\n");
+    }
+
+    if(vendasEncontradas == 1){
+
+        printf("Relatorio criado!\n");
+    }
+
+    fclose(fp);
+}
+
+void relatorioAnual(ELEMENTO_V *iniLista_v){
+
+    time_t mytime = time(NULL);                   //time.h
+    struct tm *dataAtual = localtime(&mytime);
+    int anoAtual = dataAtual->tm_year+1900;
+
+    ELEMENTO_V *aux = iniLista_v;
+    FILE *fp = NULL;
+    int vendasEncontradas = 0;
+    int dia=0, mes=0, ano=0;
+
+    fp = fopen("relatorioAnual","w");
+
+    if(fp == NULL){
+
+        printf("Erro a guardar no ficheiro");
+        return;
+    }
+
+    fprintf(fp, "%-15s %-15s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+
+    while(aux != NULL){
+
+        if(sscanf(aux->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
+
+            printf("Erro!\n");
+            return;
+        }
+
+        if(ano == anoAtual){
+            
+            fprintf(fp, "%-15d %-15d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            vendasEncontradas = 1;
+
+        }    
+        aux = aux->proximo;
+    }
+    if (!vendasEncontradas) {
+
+        printf("Nao existem produtos com stock abaixo do do nivel minimo inserido!\n");
+        fprintf(fp, "\nNao existem produtos com stock abaixo do do nivel minimo inserido.\n");
+    }
+
+    if(vendasEncontradas == 1){
+
+        printf("Relatorio criado!\n");
+    }
+
+    fclose(fp);
+}
 
 
 void guardarVendasBin(ELEMENTO_V *iniLista_v){
