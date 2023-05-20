@@ -68,7 +68,8 @@ int menuProduto(){
 
 int main(){
 
-    struct tm novaData;
+    struct tm novaDataP;
+    struct tm novaDataV;
 
     PRODUTO produtos_aux;     //variável da struct produtos
     CLIENTE cliente_aux;      //variável da struct clientes
@@ -126,17 +127,19 @@ int main(){
                             scanf("%s", produtos_aux.data_validade);
                             fflush(stdin);
 
-                            if(sscanf(produtos_aux.data_validade, "%d/%d/%d", &novaData.tm_mday, &novaData.tm_mon, &novaData.tm_year) != 3){
+                            if(sscanf(produtos_aux.data_validade, "%d/%d/%d", &novaDataP.tm_mday, &novaDataP.tm_mon, &novaDataP.tm_year) != 3){
+
                                 printf("Erro!\n");
                                 system("pause");
                                 break;
                             }
-                            novaData.tm_mon -= 1;
-                            novaData.tm_year -= 1900;
+                            novaDataP.tm_mon -= 1;
+                            novaDataP.tm_year -= 1900;
 
-                            time_t data = mktime(&novaData);
+                            time_t dataP = mktime(&novaDataP);
 
-                            if(data == -1){
+                            if(dataP == -1){
+
                                 printf("Erro!\n");
                             }
 
@@ -392,18 +395,18 @@ int main(){
                                 scanf("%s", vendas_aux.data_venda);
                                 fflush(stdin);
 
-                                if(sscanf(vendas_aux.data_venda, "%d/%d/%d", &novaData.tm_mday, &novaData.tm_mon, &novaData.tm_year) != 3){
+                                if(sscanf(vendas_aux.data_venda, "%d/%d/%d", &novaDataV.tm_mday, &novaDataV.tm_mon, &novaDataV.tm_year) != 3){
 
                                     printf("Erro!\n");
                                     system("pause");
                                     break;
                                 }
-                                novaData.tm_mon -= 1;
-                                novaData.tm_year -= 1900;
+                                novaDataV.tm_mon -= 1;
+                                novaDataV.tm_year -= 1900;
 
-                                time_t data = mktime(&novaData);
+                                time_t dataV = mktime(&novaDataV);
 
-                                if(data == -1){
+                                if(dataV == -1){
 
                                     printf("Erro!\n");
                                 }
@@ -434,8 +437,8 @@ int main(){
                                 sleep(1);
                                 break; 
                             default:
-                            printf("Opcao invalida!\n");
-                            system("pause");
+                                printf("Opcao invalida!\n");
+                                system("pause");
                                 break;
                         }
                     }while(opV != 0);
