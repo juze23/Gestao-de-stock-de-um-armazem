@@ -108,7 +108,6 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
     if (digitos_lidos != digitos)
     { // Esta linha verifica se o número de dígitos lidos  é diferente do número desejado de dígitos que é 9
         printf("O NIF inserido nao possui 9 digitos!\n");
-        system("pause");
         printf("Deseja introduzir outro(S/N)?");
         scanf("%s", resposta2);
         if (strcasecmp(resposta2, "S") == 0 || strcasecmp(resposta2, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
