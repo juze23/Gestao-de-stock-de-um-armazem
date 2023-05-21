@@ -98,7 +98,7 @@ void relatorioMensal(ELEMENTO_V *iniLista_v);
 void relatorioAnual(ELEMENTO_V *iniLista_v);
 void guardarVendasBin(ELEMENTO_V *iniLista_v);
 void libertarListaVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v);
-
+int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida);
 int verificarCliente(ELEMENTO_C *iniLista_c, int num_cliente);
 int verificarProduto(ELEMENTO_P *iniLista_p, int codigo_produto);
 

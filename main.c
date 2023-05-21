@@ -389,6 +389,12 @@ int main(){
                                 scanf("%d", &vendas_aux.quantidade_vendida);
                                 fflush(stdin);
 
+                                res = decrementarQuantidade(iniLista_p, vendas_aux.numero_produto, vendas_aux.quantidade_vendida);
+                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
+
                                 //decrementar na quantidade do produto e caso n tenha a quantidade inserida, avisar
 
                                 printf("Insira a data de venda do produto (formato DD/MM/YYYY):\n");
@@ -412,6 +418,8 @@ int main(){
                                 }
 
                                 registarVendas(&iniLista_v, &fimLista_v, vendas_aux);
+
+
 
                                 printf("Venda registada!\n");
                                 system("pause");

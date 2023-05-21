@@ -79,18 +79,41 @@ int verificarProduto(ELEMENTO_P *iniLista_p, int codigo_produto){
         }
         else
         {
-            printf("Opção inválida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
+            printf("Opção invalida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
             return -2;
         }
     }
     return 0;
 }
 
-void decrementarQuantidade(){
+int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida){     //rever
 
+    ELEMENTO_P *aux = iniLista_p;
 
+    while(aux != NULL && aux->lista_p.codigo_produto != codigo_produto){
 
+        aux = aux->proximo;
+    }
+
+    if(aux->lista_p.quantidade > 0 && (aux->lista_p.quantidade - quantidade_vendida) >= 0){
+
+        aux->lista_p.quantidade-=quantidade_vendida;
+        return -1;
+    }else if((aux->lista_p.quantidade - quantidade_vendida) < 0){
+
+        printf("Nao existe quantidade suficiente do produto inserido!\n");
+        system("pause");
+        return -2;
+    }
+    else if((aux->lista_p.quantidade - quantidade_vendida) == 0){
+
+        printf("Este produto esta agora esgotado!\n");
+        system("pause");
+        return -2;
+    }
+    return 0;
 }
+
 
 void registarVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v, VENDAS novaVenda){
 
@@ -142,7 +165,7 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
         return;
     }
 
-    fprintf(fp, "%-15s %-15s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+    fprintf(fp, "%-15s %-20s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
 
     while(aux != NULL){
 
@@ -154,7 +177,7 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
 
         if(ano == anoAtual && mes == mesAtual && dia == diaAtual){
             
-            fprintf(fp, "%-15d %-15d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            fprintf(fp, "%-15d %-20d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
             vendasEncontradas = 1;
 
         }    
@@ -194,7 +217,7 @@ void relatorioMensal(ELEMENTO_V *iniLista_v){
         return;
     }
 
-    fprintf(fp, "%-15s %-15s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+    fprintf(fp, "%-15s %-20s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
 
     while(aux != NULL){
 
@@ -206,7 +229,7 @@ void relatorioMensal(ELEMENTO_V *iniLista_v){
 
         if(ano == anoAtual && mes == mesAtual){
             
-            fprintf(fp, "%-15d %-15d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            fprintf(fp, "%-15d %-20d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
             vendasEncontradas = 1;
 
         }    
@@ -245,7 +268,7 @@ void relatorioAnual(ELEMENTO_V *iniLista_v){
         return;
     }
 
-    fprintf(fp, "%-15s %-15s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+    fprintf(fp, "%-15s %-20s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
 
     while(aux != NULL){
 
@@ -257,7 +280,7 @@ void relatorioAnual(ELEMENTO_V *iniLista_v){
 
         if(ano == anoAtual){
             
-            fprintf(fp, "%-15d %-15d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            fprintf(fp, "%-15d %-20d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
             vendasEncontradas = 1;
 
         }    
