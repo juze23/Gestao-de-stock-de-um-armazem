@@ -64,6 +64,7 @@ typedef struct elemento_c{
 void lerClientesBin(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c);
 void AdicionarCliente(ELEMENTO_C **iniLista_c, ELEMENTO_C **fimLista_c, CLIENTE newCliente);
 int verificarNIF(ELEMENTO_C **iniLista_c, int *nif);
+int vereficarNtelefone(ELEMENTO_C **iniLista_c, int *n_telefone);
 int numeroclientes(ELEMENTO_C *iniLista_c);
 void AtualizarCliente(ELEMENTO_C *iniLista_c);
 void bubbleSortC(ELEMENTO_C *iniLista_c);

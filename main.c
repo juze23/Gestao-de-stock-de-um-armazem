@@ -277,18 +277,21 @@ int main(){
                                 voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
                                 break; // retorna ao menu
                             }
+                            
+                            do{
+                                printf("Insira o numero de telefone do cliente:\n");
+                                scanf("%d", &cliente_aux.n_telefone);            
+                                fflush(stdin);
 
-                            printf("Insira o numero de telefone do cliente:\n");
-                            scanf("%d", &cliente_aux.n_telefone);            
-                            fflush(stdin);
-
-                            if(cliente_aux.n_telefone < 100000000 || cliente_aux.n_telefone > 999999999){
-                                printf("O numero inserido nao possui 9 digitos!\n");
-
-                                //função para perguntar se quer retornar ou colocar outro numero de telefone
-
-                                system("pause");
-                                break;
+                                res = vereficarNtelefone(&iniLista_c,&cliente_aux.n_telefone);
+                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
+                            }while(res!=0);
+                            if (voltar_menu) {
+                                voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                break; // retorna ao menu
                             }
 
                             printf("Insira o email do cliente:\n");
@@ -394,6 +397,11 @@ int main(){
                                         voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
                                         break;
                                     }
+                                if (voltar_menu)
+                                {
+                                    voltar_menu = 0; // se o voltar_menu for igual a 1, volta para o menu
+                                    break;           // retorna ao menu
+                                }
 
                                 //decrementar na quantidade do produto e caso n tenha a quantidade inserida, avisar
 

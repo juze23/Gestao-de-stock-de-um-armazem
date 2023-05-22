@@ -123,6 +123,61 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
     return 0;
 }
 
+int vereficarNtelefone(ELEMENTO_C **iniLista_c, int *n_telefone){
+    ELEMENTO_C *aux = *iniLista_c;
+    int digitos = 9;
+
+    while(aux != NULL){
+        if(*n_telefone == aux->lista_c.n_telefone){          //percorre a lista para verificar se os codigos dos produtos são iguais
+
+            printf("Esse NIF ja existe.\n");
+            printf("Deseja inserir outro numero de telefone?(S/N) \n");
+            char resposta[3];
+            scanf("%s", resposta);
+
+            if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+                return -1;
+            }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+                return -2;
+            }else{
+                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                return -2;
+            }
+        }
+        aux = aux->proximo;
+    }
+
+    //Verificação se o NIF tem 9 digitos
+    
+    int temp = *n_telefone;
+    int digitos_lidos = 0;
+    char resposta2[3];
+
+    while (temp != 0)
+    { // O loop while divide repetidamente o valor de temp por 10 até que o valor se torne zero
+        temp /= 10;
+        digitos_lidos++;
+    }
+
+    if (digitos_lidos != digitos)
+    { // Esta linha verifica se o número de dígitos lidos  é diferente do número desejado de dígitos que é 9
+        printf("O numero de telefone inserido nao possui 9 digitos!\n");
+        printf("Deseja introduzir outro(S/N)?");
+        scanf("%s", resposta2);
+        if (strcasecmp(resposta2, "S") == 0 || strcasecmp(resposta2, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+                return -1;
+            }else if(strcasecmp(resposta2, "N") == 0 || strcasecmp(resposta2, "nao") || strcasecmp(resposta2, "não")== 0){  // se responder que não ele volta para o menu
+                return -2;
+            }else{
+                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                return -2;
+            }
+    }
+
+    return 0;
+}
+
+
 void AtualizarCliente(ELEMENTO_C *iniLista_c) {
     int nif;
     int op = 0;
