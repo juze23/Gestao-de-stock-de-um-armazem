@@ -147,43 +147,52 @@ int main(){
                             scanf("%[^\n]s", produtos_aux.categoria);
                             fflush(stdin);
 
-                            printf("Insira a quantidade:\n");
-                            scanf("%d", &produtos_aux.quantidade);
-                            fflush(stdin);
+                            do{
+                                printf("Insira a quantidade:\n");
+                                scanf("%d", &produtos_aux.quantidade);
+                                fflush(stdin);
 
-                            if(produtos_aux.quantidade < 0){
-                                printf("A quantidade não pode ser negativa!\n");
-
-                                //função para perguntar se quer retornar ou colocar outra quantidade
-
-                                system("pause");
-                                break;
+                                res = verificarquantidadeprod(produtos_aux.quantidade);
+                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
+                            }while(res != 0);
+                            if (voltar_menu) {
+                                voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                break; // retorna ao menu
                             }
 
-                            printf("Insira o preco de compra do produto (sem usar virgulas):\n");
-                            scanf("%f", &produtos_aux.compra);
-                            fflush(stdin);
+                            do{
+                                printf("Insira o preco de compra do produto (sem usar virgulas):\n");
+                                scanf("%f", &produtos_aux.compra);
+                                fflush(stdin);
 
-                            if(produtos_aux.compra < 0){
-                                printf("O preco de compra não pode ser negativo!\n");
-
-                                //função para perguntar se quer retornar ou colocar outro preco de compra
-
-                                system("pause");
-                                break;
+                                res = verificarprecodecompra(produtos_aux.compra);
+                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
+                            }while(res != 0);
+                            if (voltar_menu) {
+                                voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                break; // retorna ao menu
                             }
-
+                            
+                            do{
                             printf("Insira o preco de venda do produto (sem usar virgulas):\n");
                             scanf("%f", &produtos_aux.venda);
                             fflush(stdin);
 
-                            if(produtos_aux.venda < 0){
-                                printf("O preco de venda não pode ser negativo!\n");
-
-                                //função para perguntar se quer retornar ou colocar outro preco de venda
-
-                                system("pause");
-                                break;
+                            res = vereificarprecodevenda(produtos_aux.venda);
+                            if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                        voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
+                                        break;
+                                    }
+                            }while(res != 0);
+                            if (voltar_menu) {
+                                voltar_menu = 0;                                       // se o voltar_menu for igual a 1, volta para o menu
+                                break; // retorna ao menu
                             }
 
                             AdicionarProduto(&iniLista_p, &fimLista_p, produtos_aux);

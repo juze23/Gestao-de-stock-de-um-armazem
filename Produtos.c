@@ -80,6 +80,77 @@ int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento a
     return 0;
 }
 
+
+int verificarquantidadeprod(int quantidade){
+    
+    char resposta[3];
+    
+    if(quantidade <= 0){
+        printf("Nao e possivel introduzir quantidade igual ou inferior a 0\n");
+        printf("Deseja inserir outra quantidade?(S/N) \n");
+        scanf("%s", resposta);
+
+        if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+            return -1;
+        }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+            return -2;
+        }else{
+            printf("Opção inválida! A voltar ao menu");
+            system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+            return -2;
+            }
+
+    }
+    return 0;
+}
+
+int vereificarprecodevenda(int precovenda){
+    char resposta[3];
+    
+    if(precovenda<= 0){
+        printf("Nao e possivel introduzir o preco de venda igual ou inferior a 0\n");
+        printf("Deseja inserir outro preco de venda?(S/N) \n");
+        scanf("%s", resposta);
+
+        if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+            return -1;
+        }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+            return -2;
+        }else{
+            printf("Opção inválida! A voltar ao menu");
+            system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+            return -2;
+            }
+
+    }
+    return 0;
+}
+
+
+int verificarprecodecompra(int precodecompra){
+    char resposta[3];
+    
+    if(precodecompra<= 0){
+        printf("Nao e possivel introduzir o preco de compra igual ou inferior a 0\n");
+        printf("Deseja inserir outro preco de compra?(S/N) \n");
+        scanf("%s", resposta);
+
+        if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+            return -1;
+        }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+            return -2;
+        }else{
+            printf("Opção inválida! A voltar ao menu");
+            system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+            return -2;
+            }
+
+    }
+    return 0;
+}
+
+
+
 void AtualizarProduto(ELEMENTO_P *iniLista_p){              //case 2
 
     int codigoA=0;
