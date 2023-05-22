@@ -372,12 +372,12 @@ int main(){
                                 }
                                 
                                 do{
-                                printf("Insira o codigo do produto vendido:\n");
-                                scanf("%d", &vendas_aux.numero_produto);
-                                fflush(stdin);
+                                    printf("Insira o codigo do produto vendido:\n");
+                                    scanf("%d", &vendas_aux.numero_produto);
+                                    fflush(stdin);
 
-                                res = verificarProduto(iniLista_p,vendas_aux.numero_produto);
-                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                    res = verificarProduto(iniLista_p,vendas_aux.numero_produto);
+                                    if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
                                         voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
                                         break;
                                     }
@@ -388,15 +388,18 @@ int main(){
                                     break; // retorna ao menu
                                 }
 
-                                printf("Insira a quantidade vendida:\n");
-                                scanf("%d", &vendas_aux.quantidade_vendida);
-                                fflush(stdin);
+                                do{
+                                    printf("Insira a quantidade vendida:\n");
+                                    scanf("%d", &vendas_aux.quantidade_vendida);
+                                    fflush(stdin);
 
-                                res = decrementarQuantidade(iniLista_p, vendas_aux.numero_produto, vendas_aux.quantidade_vendida);
-                                if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
+                                    res = decrementarQuantidade(iniLista_p, vendas_aux.numero_produto, vendas_aux.quantidade_vendida);
+                                    if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
                                         voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
                                         break;
                                     }
+                                }while(res != 0);
+                                
                                 if (voltar_menu)
                                 {
                                     voltar_menu = 0; // se o voltar_menu for igual a 1, volta para o menu

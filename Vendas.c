@@ -89,10 +89,28 @@ int verificarProduto(ELEMENTO_P *iniLista_p, int codigo_produto){
 int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida){     //rever
 
     ELEMENTO_P *aux = iniLista_p;
+    char resposta[3];
 
     while(aux != NULL && aux->lista_p.codigo_produto != codigo_produto){
 
         aux = aux->proximo;
+    }
+
+    if(quantidade_vendida <= 0){
+        printf("Nao e possivel introduzir quantidade igual ou inferior a 0\n");
+        printf("Deseja inserir outra quantidade?(S/N) \n");
+        scanf("%s", resposta);
+
+        if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+            return -1;
+        }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+            return -2;
+        }else{
+            printf("Opção inválida! A voltar ao menu");
+            system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+            return -2;
+            }
+
     }
 
     if(aux->lista_p.quantidade > 0 && (aux->lista_p.quantidade - quantidade_vendida) >= 0){
@@ -111,6 +129,7 @@ int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quanti
         system("pause");
         return -2;
     }
+
     return 0;
 }
 
