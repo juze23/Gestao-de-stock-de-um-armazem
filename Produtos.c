@@ -220,7 +220,7 @@ void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num) {
     }
 
     if (aux == NULL) {
-        printf("Não existe produto com esse codigo|\n");
+        printf("Nao existe produto com esse codigo!\n");
         return;
     }else{
         printf("Produto removido!\n");
