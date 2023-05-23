@@ -211,8 +211,6 @@ void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num) {
     if (*iniLista_p == NULL) {
         printf("Lista vazia!\n");
         return;
-    } else {
-        printf("Produto removido!\n");
     }
     
     aux = *iniLista_p;  
@@ -222,7 +220,10 @@ void removerProduto(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p, int num) {
     }
 
     if (aux == NULL) {
+        printf("Não existe produto com esse codigo|\n");
         return;
+    }else{
+        printf("Produto removido!\n");
     }
 
     if (aux->anterior == NULL) {
