@@ -50,7 +50,7 @@ int menuVendas(){
 int menuProduto(){
 
     int op = 0;
-    printf("\n*** Gestao de Stock de um armazem de distribuicao de alimentos ***\n\n");
+    printf("\n*** Gestao do stock de produtos do armazem ***\n\n");
     printf("\n1 - Adicionar produto ao stock");
     printf("\n2 - Atualizar as informacoes de um produto existente");
     printf("\n3 - Remover um produto do stock");
@@ -166,7 +166,7 @@ int main(){
                             }
 
                             do{
-                                printf("Insira o preco de compra do produto (sem usar virgulas):\n");
+                                printf("Insira o preco de compra do produto por unidade (sem usar virgulas):\n");
                                 scanf("%f", &produtos_aux.compra);
                                 fflush(stdin);
 
@@ -182,7 +182,7 @@ int main(){
                             }
                             
                             do{
-                            printf("Insira o preco de venda do produto (sem usar virgulas):\n");
+                            printf("Insira o preco de venda do produto por unidade (sem usar virgulas):\n");
                             scanf("%f", &produtos_aux.venda);
                             fflush(stdin);
 
