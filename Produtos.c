@@ -104,7 +104,7 @@ int verificarquantidadeprod(int quantidade){
     return 0;
 }
 
-int vereificarprecodevenda(int precovenda){
+int vereificarprecodevenda(float precovenda){
     char resposta[3];
     
     if(precovenda<= 0){
@@ -127,7 +127,7 @@ int vereificarprecodevenda(int precovenda){
 }
 
 
-int verificarprecodecompra(int precodecompra){
+int verificarprecodecompra(float precodecompra){
     char resposta[3];
     
     if(precodecompra<= 0){

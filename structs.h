@@ -40,8 +40,8 @@ int verificarcodigo(ELEMENTO_P **iniLista, int *codigo);
 void guardarProdutosBin(ELEMENTO_P *iniLista);
 void libertarListaProdutos(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p);
 int verificarquantidadeprod(int quantidade);
-int vereificarprecodevenda(int precovenda);
-int verificarprecodecompra(int precodecompra);
+int vereificarprecodevenda(float precovenda);
+int verificarprecodecompra(float precodecompra);
 
 //Clientes
 
