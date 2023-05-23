@@ -443,8 +443,6 @@ int main(){
 
                                 registarVendas(&iniLista_v, &fimLista_v, vendas_aux);
 
-
-
                                 printf("Venda registada!\n");
                                 system("pause");
 

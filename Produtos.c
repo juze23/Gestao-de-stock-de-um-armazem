@@ -397,11 +397,7 @@ void verificarDataValidade(ELEMENTO_P *iniLista_p){
             return;
         }
 
-        if(ano < anoAtual){
-            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
-        }else if(mes < mesAtual){
-            printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
-        }else if(dia < diaAtual){
+        if (ano < anoAtual || (ano == anoAtual && mes < mesAtual) || (ano == anoAtual && mes == mesAtual && dia < diaAtual)) {
             printf("%-8d %-25s %-18s %-20s %-14d %-20.2f %-12.2f\n", aux->lista_p.codigo_produto, aux->lista_p.nome_produto, aux->lista_p.categoria, aux->lista_p.data_validade, aux->lista_p.quantidade, aux->lista_p.compra, aux->lista_p.venda);
         }
 
