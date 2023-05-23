@@ -91,11 +91,6 @@ int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quanti
     ELEMENTO_P *aux = iniLista_p;
     char resposta[3];
 
-    while(aux != NULL && aux->lista_p.codigo_produto != codigo_produto){
-
-        aux = aux->proximo;
-    }
-
     if(quantidade_vendida <= 0){
         printf("Nao e possivel introduzir quantidade igual ou inferior a 0\n");
         printf("Deseja inserir outra quantidade?(S/N) \n");
@@ -113,10 +108,16 @@ int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quanti
 
     }
 
+    
+    while(aux != NULL && aux->lista_p.codigo_produto != codigo_produto){
+
+        aux = aux->proximo;
+    }
+
     if(aux->lista_p.quantidade > 0 && (aux->lista_p.quantidade - quantidade_vendida) >= 0){
 
         aux->lista_p.quantidade-=quantidade_vendida;
-        return -1;
+        return 0;
     }else if((aux->lista_p.quantidade - quantidade_vendida) < 0){
 
         printf("Nao existe quantidade suficiente do produto inserido!\n");

@@ -50,7 +50,7 @@ int menuVendas(){
 int menuProduto(){
 
     int op = 0;
-    printf("\n*** Gestao do stock de produtos do armazem ***\n\n");
+    printf("\n*** Gestao de Stock de um armazem de distribuicao de alimentos ***\n\n");
     printf("\n1 - Adicionar produto ao stock");
     printf("\n2 - Atualizar as informacoes de um produto existente");
     printf("\n3 - Remover um produto do stock");
@@ -136,7 +136,9 @@ int main(){
                             novaDataP.tm_mon -= 1;
                             novaDataP.tm_year -= 1900;
 
-                            time_t dataP = mktime(&novaDataP);
+                            int dataP;
+
+                            dataP = mktime(&novaDataP);
 
                             if(dataP == -1){
 
@@ -430,7 +432,9 @@ int main(){
                                 novaDataV.tm_mon -= 1;
                                 novaDataV.tm_year -= 1900;
 
-                                time_t dataV = mktime(&novaDataV);
+                                int dataV;
+
+                                dataV = mktime(&novaDataV);
 
                                 if(dataV == -1){
 
