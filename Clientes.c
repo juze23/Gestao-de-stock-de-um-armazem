@@ -130,7 +130,7 @@ int vereficarNtelefone(ELEMENTO_C **iniLista_c, int *n_telefone){
     while(aux != NULL){
         if(*n_telefone == aux->lista_c.n_telefone){          //percorre a lista para verificar se os codigos dos produtos são iguais
 
-            printf("Esse NIF ja existe.\n");
+            printf("Esse numero de telefone ja existe.\n");
             printf("Deseja inserir outro numero de telefone?(S/N) \n");
             char resposta[3];
             scanf("%s", resposta);
@@ -282,11 +282,11 @@ void listarClientesAlfabetica(ELEMENTO_C *iniLista_c){        //case 5
     bubbleSortC(iniLista_c);
 
     printf("Lista de todos os clientes ordenados por ordem alfabetica: \n");
-    printf("%-8s %-25s %-18s %-20s %-14s %-20s\n", "Numero", "Nome", "Morada", "NIF","Telefone", "Email");
+    printf("%-10s %-25s %-25s %-18s %-18s %-20s\n", "Numero", "Nome", "Morada", "NIF","Telefone", "Email");
 
     while(aux != NULL){
         
-        printf("%-8d %-25s %-18s %-20d %-14d %-20s\n", aux->lista_c.numero, aux->lista_c.nome, aux->lista_c.morada, aux->lista_c.NIF, aux->lista_c.n_telefone, aux->lista_c.email);
+        printf("%-10d %-25s %-25s %-18d %-18d %-20s\n", aux->lista_c.numero, aux->lista_c.nome, aux->lista_c.morada, aux->lista_c.NIF, aux->lista_c.n_telefone, aux->lista_c.email);
         aux = aux->proximo; // percorrer todos os produtos
     }
 
