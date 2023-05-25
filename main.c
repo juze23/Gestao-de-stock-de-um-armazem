@@ -449,17 +449,17 @@ int main(){
                                 break;
                             case 2:
 
-                                relatorioDiario(iniLista_v);
+                                relatorioDiario(iniLista_v, iniLista_p);
                                 system("pause");
                                 break;
                             case 3:
 
-                                relatorioMensal(iniLista_v);
+                                relatorioMensal(iniLista_v, iniLista_p);
                                 system("pause");
                                 break;
                             case 4:
 
-                                relatorioAnual(iniLista_v);
+                                relatorioAnual(iniLista_v, iniLista_p);
                                 system("pause");
                                 break;
                             case 0:

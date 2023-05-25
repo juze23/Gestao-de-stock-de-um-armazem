@@ -164,7 +164,7 @@ void registarVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v, VENDAS nov
 
 }
 
-void relatorioDiario(ELEMENTO_V *iniLista_v){
+void relatorioDiario(ELEMENTO_V *iniLista_v, ELEMENTO_P *iniLista_p){
 
     time_t mytime = time(NULL);                   //time.h
     struct tm *dataAtual = localtime(&mytime);
@@ -172,10 +172,13 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
     int mesAtual = dataAtual->tm_mon+1;
     int anoAtual = dataAtual->tm_year+1900;
 
-    ELEMENTO_V *aux = iniLista_v;
+    ELEMENTO_V *auxV = iniLista_v;
+    ELEMENTO_P *auxP = iniLista_p;
     FILE *fp = NULL;
     int vendasEncontradas = 0;
     int dia=0, mes=0, ano=0;
+
+    float venda = 0;
 
     fp = fopen("relatorioDiario","w");
 
@@ -185,23 +188,34 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
         return;
     }
 
-    fprintf(fp, "%-15s %-20s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+    fprintf(fp, "%-15s %-20s %-15s %-20s %-15s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda", "Valor Pago");
 
-    while(aux != NULL){
+    while(auxV != NULL){
 
-        if(sscanf(aux->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
+        if(sscanf(auxV->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
 
             printf("Erro!\n");
             return;
         }
 
+        auxP = iniLista_p;
+
         if(ano == anoAtual && mes == mesAtual && dia == diaAtual){
+
+            while(auxP != NULL){
+
+                if(auxP->lista_p.codigo_produto == auxV->lista_v.numero_produto){
+
+                    venda = (auxP->lista_p.venda * auxV->lista_v.quantidade_vendida);
+                }
+                auxP = auxP->proximo;
+            }
             
-            fprintf(fp, "%-15d %-20d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            fprintf(fp, "%-15d %-20d %-15d %-20s %-15.2f\n", auxV->lista_v.numero_cliente, auxV->lista_v.numero_produto, auxV->lista_v.quantidade_vendida, auxV->lista_v.data_venda, venda);
             vendasEncontradas = 1;
 
         }    
-        aux = aux->proximo;
+        auxV = auxV->proximo;
     }
     if (!vendasEncontradas) {
 
@@ -217,17 +231,20 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
     fclose(fp);
 }
 
-void relatorioMensal(ELEMENTO_V *iniLista_v){
+void relatorioMensal(ELEMENTO_V *iniLista_v, ELEMENTO_P * iniLista_p){
 
     time_t mytime = time(NULL);                   //time.h
     struct tm *dataAtual = localtime(&mytime);
     int mesAtual = dataAtual->tm_mon+1;
     int anoAtual = dataAtual->tm_year+1900;
 
-    ELEMENTO_V *aux = iniLista_v;
+    ELEMENTO_P *auxP = iniLista_p;
+    ELEMENTO_V *auxV = iniLista_v;
     FILE *fp = NULL;
     int vendasEncontradas = 0;
     int dia=0, mes=0, ano=0;
+
+    float venda = 0;
 
     fp = fopen("relatorioMensal","w");
 
@@ -237,23 +254,34 @@ void relatorioMensal(ELEMENTO_V *iniLista_v){
         return;
     }
 
-    fprintf(fp, "%-15s %-20s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+    fprintf(fp, "%-15s %-20s %-15s %-20s %-15s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda", "Valor Pago");
 
-    while(aux != NULL){
+    while(auxV != NULL){
 
-        if(sscanf(aux->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
+        if(sscanf(auxV->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
 
             printf("Erro!\n");
             return;
         }
 
+        auxP = iniLista_p;
+
         if(ano == anoAtual && mes == mesAtual){
             
-            fprintf(fp, "%-15d %-20d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            while(auxP != NULL){
+
+                if(auxP->lista_p.codigo_produto == auxV->lista_v.numero_produto){
+
+                    venda = (auxP->lista_p.venda * auxV->lista_v.quantidade_vendida);
+                }
+                auxP = auxP->proximo;
+            }
+
+            fprintf(fp, "%-15d %-20d %-15d %-20s %-15.2f\n", auxV->lista_v.numero_cliente, auxV->lista_v.numero_produto, auxV->lista_v.quantidade_vendida, auxV->lista_v.data_venda, venda);
             vendasEncontradas = 1;
 
         }    
-        aux = aux->proximo;
+        auxV = auxV->proximo;
     }
     if (!vendasEncontradas) {
 
@@ -269,16 +297,19 @@ void relatorioMensal(ELEMENTO_V *iniLista_v){
     fclose(fp);
 }
 
-void relatorioAnual(ELEMENTO_V *iniLista_v){
+void relatorioAnual(ELEMENTO_V *iniLista_v, ELEMENTO_P *iniLista_p){
 
     time_t mytime = time(NULL);                   //time.h
     struct tm *dataAtual = localtime(&mytime);
     int anoAtual = dataAtual->tm_year+1900;
 
-    ELEMENTO_V *aux = iniLista_v;
+    ELEMENTO_P *auxP = iniLista_p;
+    ELEMENTO_V *auxV = iniLista_v;
     FILE *fp = NULL;
     int vendasEncontradas = 0;
     int dia=0, mes=0, ano=0;
+
+    float venda = 0;
 
     fp = fopen("relatorioAnual","w");
 
@@ -288,23 +319,34 @@ void relatorioAnual(ELEMENTO_V *iniLista_v){
         return;
     }
 
-    fprintf(fp, "%-15s %-20s %-15s %-20s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda");
+    fprintf(fp, "%-15s %-20s %-15s %-20s %-15s\n", "Cliente", "Codigo do Produto", "Quantidade", "Data de venda", "Valor Pago");
 
-    while(aux != NULL){
+    while(auxV != NULL){
 
-        if(sscanf(aux->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
+        if(sscanf(auxV->lista_v.data_venda, "%d/%d/%d", &dia, &mes, &ano) != 3){
 
             printf("Erro!\n");
             return;
         }
 
+        auxP = iniLista_p;
+
         if(ano == anoAtual){
             
-            fprintf(fp, "%-15d %-20d %-15d %-20s\n", aux->lista_v.numero_cliente, aux->lista_v.numero_produto, aux->lista_v.quantidade_vendida, aux->lista_v.data_venda);
+            while(auxP != NULL){
+
+                if(auxP->lista_p.codigo_produto == auxV->lista_v.numero_produto){
+
+                    venda = (auxP->lista_p.venda * auxV->lista_v.quantidade_vendida);
+                }
+                auxP = auxP->proximo;
+            }
+
+            fprintf(fp, "%-15d %-20d %-15d %-20s %-15.2f\n", auxV->lista_v.numero_cliente, auxV->lista_v.numero_produto, auxV->lista_v.quantidade_vendida, auxV->lista_v.data_venda, venda);
             vendasEncontradas = 1;
 
         }    
-        aux = aux->proximo;
+        auxV = auxV->proximo;
     }
     if (!vendasEncontradas) {
 

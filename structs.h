@@ -95,11 +95,10 @@ typedef struct elemento_v{
 }ELEMENTO_V;
 
 void lerVendasBin(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v);
-
 void registarVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v, VENDAS novaVenda);
-void relatorioDiario(ELEMENTO_V *iniLista_v);
-void relatorioMensal(ELEMENTO_V *iniLista_v);
-void relatorioAnual(ELEMENTO_V *iniLista_v);
+void relatorioDiario(ELEMENTO_V *iniLista_v, ELEMENTO_P *iniLista_p);
+void relatorioMensal(ELEMENTO_V *iniLista_v, ELEMENTO_P *iniLista_p);
+void relatorioAnual(ELEMENTO_V *iniLista_v, ELEMENTO_P *iniLista_p);
 void guardarVendasBin(ELEMENTO_V *iniLista_v);
 void libertarListaVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v);
 int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida);

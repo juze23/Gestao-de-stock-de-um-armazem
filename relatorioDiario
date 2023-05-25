@@ -1,3 +1,4 @@
-Cliente         Codigo do Produto    Quantidade      Data de venda       
-
-Nao existem produtos vendidos no dia de hoje!
+Cliente         Codigo do Produto    Quantidade      Data de venda        Valor Pago     
+1               123                  2               26/05/2023           100.00         
+4               55                   3               26/05/2023           90.00          
+2               55                   1               26/05/2023           30.00          
