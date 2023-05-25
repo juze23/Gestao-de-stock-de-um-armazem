@@ -205,8 +205,8 @@ void relatorioDiario(ELEMENTO_V *iniLista_v){
     }
     if (!vendasEncontradas) {
 
-        printf("Nao existem produtos com stock abaixo do do nivel minimo inserido!\n");
-        fprintf(fp, "\nNao existem produtos com stock abaixo do do nivel minimo inserido.\n");
+        printf("Nao existem produtos vendidos no dia de hoje!\n");
+        fprintf(fp, "\nNao existem produtos vendidos no dia de hoje!\n");
     }
 
     if(vendasEncontradas == 1){
@@ -257,8 +257,8 @@ void relatorioMensal(ELEMENTO_V *iniLista_v){
     }
     if (!vendasEncontradas) {
 
-        printf("Nao existem produtos com stock abaixo do do nivel minimo inserido!\n");
-        fprintf(fp, "\nNao existem produtos com stock abaixo do do nivel minimo inserido.\n");
+        printf("Nao existem produtos vendidos no mes atual!\n");
+        fprintf(fp, "\nNao existem produtos vendidos no mes atual!\n");
     }
 
     if(vendasEncontradas == 1){
@@ -308,8 +308,8 @@ void relatorioAnual(ELEMENTO_V *iniLista_v){
     }
     if (!vendasEncontradas) {
 
-        printf("Nao existem produtos com stock abaixo do do nivel minimo inserido!\n");
-        fprintf(fp, "\nNao existem produtos com stock abaixo do do nivel minimo inserido.\n");
+        printf("Nao existem produtos vendidos este ano!\n");
+        fprintf(fp, "\nNao existem produtos vendidos este ano\n");
     }
 
     if(vendasEncontradas == 1){
