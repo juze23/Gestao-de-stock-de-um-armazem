@@ -71,7 +71,7 @@ int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento a
             }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
                 return -2;
             }else{
-                printf("Opção inválida! A voltar ao menu..");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                printf("Opcao invalida! A voltar ao menu..");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
                 return -2;
             }
         }
@@ -127,7 +127,7 @@ int verificarquantidadeprod(int quantidade){
         }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
             return -2;
         }else{
-            printf("Opção inválida! A voltar ao menu");
+            printf("Opcao invalida! A voltar ao menu");
             system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
             return -2;
             }
@@ -149,7 +149,7 @@ int vereificarprecodevenda(float precovenda){
         }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
             return -2;
         }else{
-            printf("Opção inválida! A voltar ao menu");
+            printf("Opcao invalida! A voltar ao menu");
             system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
             return -2;
             }
@@ -172,7 +172,7 @@ int verificarprecodecompra(float precodecompra){
         }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
             return -2;
         }else{
-            printf("Opção inválida! A voltar ao menu");
+            printf("Opcao invalida! A voltar ao menu");
             system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
             return -2;
             }

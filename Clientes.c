@@ -86,7 +86,7 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
             }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
                 return -2;
             }else{
-                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                printf("Opcao invalida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
                 return -2;
             }
         }
@@ -115,7 +115,7 @@ int verificarNIF(ELEMENTO_C **iniLista_c, int *nif){
             }else if(strcasecmp(resposta2, "N") == 0 || strcasecmp(resposta2, "nao") || strcasecmp(resposta2, "não")== 0){  // se responder que não ele volta para o menu
                 return -2;
             }else{
-                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                printf("Opcao invalida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
                 return -2;
             }
     }
@@ -140,7 +140,7 @@ int vereficarNtelefone(ELEMENTO_C **iniLista_c, int *n_telefone){
             }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
                 return -2;
             }else{
-                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                printf("Opcao invalida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
                 return -2;
             }
         }
@@ -169,7 +169,7 @@ int vereficarNtelefone(ELEMENTO_C **iniLista_c, int *n_telefone){
             }else if(strcasecmp(resposta2, "N") == 0 || strcasecmp(resposta2, "nao") || strcasecmp(resposta2, "não")== 0){  // se responder que não ele volta para o menu
                 return -2;
             }else{
-                printf("Opção inválida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                printf("Opcao invalida! A voltar ao menu");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
                 return -2;
             }
     }
