@@ -80,6 +80,38 @@ int verificarcodigo(ELEMENTO_P **iniLista_p, int *codigo){        //incremento a
     return 0;
 }
 
+int verificarData(char *data_validade){
+
+    time_t mytime = time(NULL);                   //time.h
+    struct tm *dataAtual = localtime(&mytime);
+    int diaAtual = dataAtual->tm_mday;
+    int mesAtual = dataAtual->tm_mon+1;
+    int anoAtual = dataAtual->tm_year+1900;
+
+    int dia=0, mes=0, ano=0;
+
+    sscanf(data_validade, "%d/%d/%d", &dia, &mes, &ano);
+
+    if (ano < anoAtual || (ano == anoAtual && mes < mesAtual) || (ano == anoAtual && mes == mesAtual && dia < diaAtual)) {
+        
+        printf("Esse produto tem data de validade vencida!\n");
+        printf("Inseriu a data de validade errada?(S/N)\n");
+            char resposta[3];
+            scanf("%s", resposta);
+
+            if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+                return -1;
+            }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+                return -2;
+            }else{
+                printf("Opcao invalida! A voltar ao menu..");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                return -2;
+            }
+    }
+
+    return 0;
+}
+
 
 int verificarquantidadeprod(int quantidade){
     

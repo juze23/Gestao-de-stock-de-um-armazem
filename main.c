@@ -123,26 +123,39 @@ int main(){
                             scanf("%[^\n]s", produtos_aux.nome_produto);
                             fflush(stdin);
 
-                            printf("Insira a data de validade do produto (formato DD/MM/YYYY):\n");
-                            scanf("%s", produtos_aux.data_validade);
-                            fflush(stdin);
+                            do{
 
-                            if(sscanf(produtos_aux.data_validade, "%d/%d/%d", &novaDataP.tm_mday, &novaDataP.tm_mon, &novaDataP.tm_year) != 3){
+                                printf("Insira a data de validade do produto (formato DD/MM/YYYY):\n");
+                                scanf("%s", produtos_aux.data_validade);
+                                fflush(stdin);
 
-                                printf("Erro!\n");
-                                system("pause");
+                                if(sscanf(produtos_aux.data_validade, "%d/%d/%d", &novaDataP.tm_mday, &novaDataP.tm_mon, &novaDataP.tm_year) != 3){
+
+                                    printf("Erro!\n");
+                                    system("pause");
+                                    break;
+                                }
+                                novaDataP.tm_mon -= 1;
+                                novaDataP.tm_year -= 1900;
+
+                                int dataP;
+
+                                dataP = mktime(&novaDataP);
+
+                                if(dataP == -1){
+
+                                    printf("Erro!\n");
+                                }
+
+                                res = verificarData(produtos_aux.data_validade);   
+                                    if(res == -2){
+                                        voltar_menu =1;
+                                        break;
+                                    }
+                            }while(res!=0);
+                            if (voltar_menu) {
+                                voltar_menu = 0;
                                 break;
-                            }
-                            novaDataP.tm_mon -= 1;
-                            novaDataP.tm_year -= 1900;
-
-                            int dataP;
-
-                            dataP = mktime(&novaDataP);
-
-                            if(dataP == -1){
-
-                                printf("Erro!\n");
                             }
 
                             printf("Insira a categoria do produto:\n");
@@ -404,7 +417,7 @@ int main(){
                                     scanf("%d", &vendas_aux.quantidade_vendida);
                                     fflush(stdin);
 
-                                    res = decrementarQuantidade(iniLista_p, vendas_aux.numero_produto, vendas_aux.quantidade_vendida);
+                                    res =verificarQuantidade(iniLista_p, vendas_aux.numero_produto, vendas_aux.quantidade_vendida);
                                     if(res == -2){                                               // se o res for igual a -2 altera a variavel voltar_menu para 1
                                         voltar_menu =1;                                          // o res é igual a -2 quando a resposta é não ou quando a respostas não é uma das quatro opções pedidas
                                         break;
@@ -419,27 +432,41 @@ int main(){
 
                                 //decrementar na quantidade do produto e caso n tenha a quantidade inserida, avisar
 
-                                printf("Insira a data de venda do produto (formato DD/MM/YYYY):\n");
-                                scanf("%s", vendas_aux.data_venda);
-                                fflush(stdin);
+                                do{
 
-                                if(sscanf(vendas_aux.data_venda, "%d/%d/%d", &novaDataV.tm_mday, &novaDataV.tm_mon, &novaDataV.tm_year) != 3){
+                                    printf("Insira a data de venda do produto (formato DD/MM/YYYY):\n");
+                                    scanf("%s", vendas_aux.data_venda);
+                                    fflush(stdin);
 
-                                    printf("Erro!\n");
-                                    system("pause");
+                                    if(sscanf(vendas_aux.data_venda, "%d/%d/%d", &novaDataV.tm_mday, &novaDataV.tm_mon, &novaDataV.tm_year) != 3){
+
+                                        printf("Erro!\n");
+                                        system("pause");
+                                        break;
+                                    }
+                                    novaDataV.tm_mon -= 1;
+                                    novaDataV.tm_year -= 1900;
+
+                                    int dataV;
+
+                                    dataV = mktime(&novaDataV);
+
+                                    if(dataV == -1){
+
+                                        printf("Erro!\n");
+                                    }
+                                    res = verificarDataVenda(vendas_aux.data_venda);   
+                                        if(res == -2){
+                                            voltar_menu =1;
+                                            break;
+                                        }
+                                }while(res!=0);
+                                if (voltar_menu) {
+                                    voltar_menu = 0;
                                     break;
                                 }
-                                novaDataV.tm_mon -= 1;
-                                novaDataV.tm_year -= 1900;
 
-                                int dataV;
-
-                                dataV = mktime(&novaDataV);
-
-                                if(dataV == -1){
-
-                                    printf("Erro!\n");
-                                }
+                                decrementarQuantidade(iniLista_p, vendas_aux.numero_produto, vendas_aux.quantidade_vendida);
 
                                 registarVendas(&iniLista_v, &fimLista_v, vendas_aux);
 

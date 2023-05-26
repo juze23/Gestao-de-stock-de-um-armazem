@@ -46,7 +46,7 @@ int verificarCliente(ELEMENTO_C *iniLista_c, int num_cliente){
         }
         else
         {
-            printf("Opção inválida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
+            printf("Opcao invalida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
             return -2;
         }
     }
@@ -79,14 +79,46 @@ int verificarProduto(ELEMENTO_P *iniLista_p, int codigo_produto){
         }
         else
         {
-            printf("Opção invalida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
+            printf("Opcao invalida! A voltar ao menu"); // se o utilizador  não responder uma das quatro opções, volta para o menu
             return -2;
         }
     }
     return 0;
 }
 
-int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida){     //rever
+int verificarDataVenda(char *data_venda){
+
+    time_t mytime = time(NULL);                   //time.h
+    struct tm *dataAtual = localtime(&mytime);
+    int diaAtual = dataAtual->tm_mday;
+    int mesAtual = dataAtual->tm_mon+1;
+    int anoAtual = dataAtual->tm_year+1900;
+
+    int dia=0, mes=0, ano=0;
+
+    sscanf(data_venda, "%d/%d/%d", &dia, &mes, &ano);
+
+    if (ano > anoAtual || (ano == anoAtual && mes > mesAtual) || (ano == anoAtual && mes == mesAtual && dia > diaAtual)) {
+        
+        printf("A compra nao pode ter uma data futura!\n");
+        printf("Inseriu a data de compra errada?(S/N)\n");
+            char resposta[3];
+            scanf("%s", resposta);
+
+            if (strcasecmp(resposta, "S") == 0 || strcasecmp(resposta, "sim") == 0) {  // se o utilizador que resporder que sim ele pode introduzir um novo codigo
+                return -1;
+            }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
+                return -2;
+            }else{
+                printf("Opcao invalida! A voltar ao menu..");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
+                return -2;
+            }
+    }
+
+    return 0;
+}
+
+int verificarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida){     //rever
 
     ELEMENTO_P *aux = iniLista_p;
     char resposta[3];
@@ -101,32 +133,27 @@ int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quanti
         }else if(strcasecmp(resposta, "N") == 0 || strcasecmp(resposta, "nao") || strcasecmp(resposta, "não")== 0){  // se responder que não ele volta para o menu
             return -2;
         }else{
-            printf("Opção inválida! A voltar ao menu");
+            printf("Opcao invalida! A voltar ao menu");
             system("pause");     // se o utilizador  não responder uma das quatro opções, volta para o menu 
             return -2;
             }
 
     }
-
     
     while(aux != NULL && aux->lista_p.codigo_produto != codigo_produto){
 
         aux = aux->proximo;
     }
 
-    if(aux->lista_p.quantidade > 0 && (aux->lista_p.quantidade - quantidade_vendida) >= 0){
-
-        aux->lista_p.quantidade-=quantidade_vendida;
-        return 0;
-    }else if((aux->lista_p.quantidade - quantidade_vendida) < 0){
+    if((aux->lista_p.quantidade - quantidade_vendida) < 0){
 
         printf("Nao existe quantidade suficiente do produto inserido!\n");
         system("pause");
         return -2;
     }
-    else if((aux->lista_p.quantidade - quantidade_vendida) == 0){
+    else if(aux->lista_p.quantidade == 0){
 
-        printf("Este produto esta agora esgotado!\n");
+        printf("Este produto encontra-se esgotado!\n");
         system("pause");
         return -2;
     }
@@ -134,6 +161,20 @@ int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quanti
     return 0;
 }
 
+void decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida){
+    
+    ELEMENTO_P *aux = iniLista_p;
+
+    while(aux != NULL && aux->lista_p.codigo_produto != codigo_produto){
+
+        aux = aux->proximo;
+    }
+    
+    if(aux->lista_p.quantidade > 0 && (aux->lista_p.quantidade - quantidade_vendida) >= 0){
+
+        aux->lista_p.quantidade-=quantidade_vendida;
+    }
+}
 
 void registarVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v, VENDAS novaVenda){
 

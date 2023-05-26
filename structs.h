@@ -42,6 +42,7 @@ void libertarListaProdutos(ELEMENTO_P **iniLista_p, ELEMENTO_P **fimLista_p);
 int verificarquantidadeprod(int quantidade);
 int vereificarprecodevenda(float precovenda);
 int verificarprecodecompra(float precodecompra);
+int verificarData(char *data_validade);
 
 //Clientes
 
@@ -101,8 +102,10 @@ void relatorioMensal(ELEMENTO_V *iniLista_v, ELEMENTO_P *iniLista_p);
 void relatorioAnual(ELEMENTO_V *iniLista_v, ELEMENTO_P *iniLista_p);
 void guardarVendasBin(ELEMENTO_V *iniLista_v);
 void libertarListaVendas(ELEMENTO_V **iniLista_v, ELEMENTO_V **fimLista_v);
-int decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida);
+int verificarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida);
+void decrementarQuantidade(ELEMENTO_P *iniLista_p, int codigo_produto, int quantidade_vendida);
 int verificarCliente(ELEMENTO_C *iniLista_c, int num_cliente);
 int verificarProduto(ELEMENTO_P *iniLista_p, int codigo_produto);
+int verificarDataVenda(char *data_venda);
 
 #endif
